@@ -1,59 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class EnemyScript : MonoBehaviour
 {
     [SerializeField] private GameObject _player;
-    [SerializeField] private GameObject _rotationDirection;
+    [SerializeField] private GameObject _projectile;
+    [SerializeField] private float _fireRate;
+    [SerializeField] private GameObject _projSpawnLocation;
+    private float _timer;
 
-    [SerializeField] private Rigidbody2D _rigidbody;
-    [SerializeField] private float _speed;
-    [SerializeField] private float _rotationSpeed;
-    private void Awake()
+    private void Start()
     {
         _player = GameObject.Find("Player");
-        _speed += Random.Range(-1f, 0.5f);
-        _rotationSpeed += Random.Range(-0.5f, 0.5f);
     }
 
-    void Update()
+    private void Update()
     {
-        if (_player != null)
+        if (_player == null) 
         {
-            MoveTowardsPlayer();
-            RotateTowardsPlayer();
+            return;
+        }
+
+        Movement();
+
+        _timer += Time.deltaTime;
+
+        if(_timer >= _fireRate)
+        {
+            _timer = 0;
+            Instantiate(_projectile, _projSpawnLocation.transform.position, transform.rotation);
         }
     }
 
-    void MoveTowardsPlayer()
+    public void Movement()
     {
-        transform.Translate(Vector2.up * _speed * Time.deltaTime);
-    }
+        transform.right = _player.transform.position - transform.position;
 
-    void RotateTowardsPlayer()
-    {
-        Vector3 targetDirection = _player.transform.position - transform.position;
-        float angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg;
-        Quaternion targetRotation = Quaternion.AngleAxis(angle - 90f, Vector3.forward);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.tag == "Obstacle")
+        float distance = Vector3.Distance(transform.position, _player.transform.position);
+        if (Mathf.Abs(Mathf.Abs(transform.position.x) - Mathf.Abs(_player.transform.position.x)) >= 9f || Mathf.Abs(Mathf.Abs(transform.position.y) - Mathf.Abs(_player.transform.position.y)) >= 5f)
         {
-            Destroy(gameObject);
-        }
-        if(collision.tag == "Enemy")
-        {
-            Destroy(gameObject);
-            Destroy(collision.gameObject);
-        }
-        if(collision.tag == "Player")
-        {
-            _player.GetComponent<PlayerScript>().TakeDamage();
+            transform.Translate(Vector2.right * distance * Time.deltaTime);
         }
     }
 }

@@ -42,7 +42,8 @@ public class SpawnManager : MonoBehaviour
 
         _timer = 0;
         GetValidSpawnPosition();
-        int enemyNumber = Random.Range(1, _enemyLimit + 1);
+        int enemyNumber = Random.Range(0, _enemyLimit);
+        Debug.Log(enemyNumber);
         Instantiate(_enemies[enemyNumber], new Vector3(_xPos, _yPos, 0), Quaternion.identity);
     }
 

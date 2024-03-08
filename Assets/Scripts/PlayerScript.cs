@@ -34,4 +34,12 @@ public class PlayerScript : MonoBehaviour
         Camera.main.transform.parent = null;
         Destroy(gameObject);
     }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "Enemy")
+        {
+            TakeDamage();
+        }
+    }
 }

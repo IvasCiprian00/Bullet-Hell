@@ -97,8 +97,8 @@ GameObject:
   - component: {fileID: 5510901731173220204}
   - component: {fileID: 5051171724376583352}
   m_Layer: 0
-  m_Name: Basic Enemy
-  m_TagString: Enemy
+  m_Name: Basic Projectile
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -197,4 +197,4 @@ MonoBehaviour:
   _rotationDirection: {fileID: 0}
   _rigidbody: {fileID: 5311608601841192980}
   _speed: 8
-  _rotationSpeed: 4
+  _rotationSpeed: 3
