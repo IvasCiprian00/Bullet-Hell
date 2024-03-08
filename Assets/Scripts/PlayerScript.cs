@@ -28,4 +28,10 @@ public class PlayerScript : MonoBehaviour
             _rigidbody.velocity = _rigidbody.velocity.normalized * _maxSpeed;
         }
     }
+
+    public void TakeDamage()
+    {
+        Camera.main.transform.parent = null;
+        Destroy(gameObject);
+    }
 }
