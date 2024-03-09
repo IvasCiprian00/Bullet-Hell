@@ -14,6 +14,7 @@ public class PlayerScript : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
     }
 
+
     void FixedUpdate()
     {
         Movement();
