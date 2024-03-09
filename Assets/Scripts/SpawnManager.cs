@@ -8,6 +8,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private GameObject[] _enemies;
     [SerializeField] private int _enemyLimit;
     [SerializeField] private float _spawnInterval;
+    [SerializeField] private float _maxSpawnInterval;
     [SerializeField] private GameObject _player;
 
     private float _timer;
@@ -43,7 +44,6 @@ public class SpawnManager : MonoBehaviour
         _timer = 0;
         GetValidSpawnPosition();
         int enemyNumber = Random.Range(0, _enemyLimit);
-        Debug.Log(enemyNumber);
         Instantiate(_enemies[enemyNumber], new Vector3(_xPos, _yPos, 0), Quaternion.identity);
     }
 

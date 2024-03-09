@@ -5,6 +5,7 @@ using static UnityEngine.GraphicsBuffer;
 
 public class ProjectileScript : MonoBehaviour
 {
+    [SerializeField] private GameManager _gameManager;
     [SerializeField] private GameObject _player;
     [SerializeField] private GameObject _rotationDirection;
 
@@ -13,6 +14,7 @@ public class ProjectileScript : MonoBehaviour
     [SerializeField] private float _rotationSpeed;
     private void Awake()
     {
+        _gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         _player = GameObject.Find("Player");
         _speed += Random.Range(-1f, 0.5f);
         _rotationSpeed += Random.Range(-0.5f, 0.5f);
@@ -53,6 +55,7 @@ public class ProjectileScript : MonoBehaviour
         }
         if(collision.tag == "Enemy")
         {
+            _gameManager.AddScore();
             Destroy(gameObject);
             Destroy(collision.gameObject);
         }

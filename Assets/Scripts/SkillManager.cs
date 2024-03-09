@@ -8,6 +8,7 @@ public class SkillManager : MonoBehaviour
     [SerializeField] GameObject _player;
 
     [SerializeField] private GameObject _bullet;
+    [SerializeField] private GameObject _aimsight;
     private bool _isAiming;
     private float _cooldownTimer;
     [SerializeField] private float _aimCooldown;
@@ -24,19 +25,16 @@ public class SkillManager : MonoBehaviour
 
     private void Update()
     {
-        _cooldownTimer += Time.deltaTime;
+        ShootController();
+    }
 
-        /*if (Input.GetButtonDown("Fire1"))
-        {
-            if (Time.timeScale == 1.0f)
-                Time.timeScale = 0.5f;
-            else
-                Time.timeScale = 1.0f;
-            Time.fixedDeltaTime = this.fixedDeltaTime * Time.timeScale;
-        }*/
+    public void ShootController()
+    {
+        _cooldownTimer += Time.deltaTime;
 
         if (Input.GetButtonDown("Fire1") && _cooldownTimer >= _aimCooldown && !_isAiming)
         {
+            _aimsight.SetActive(true);
             _isAiming = true;
             _aimTimer = 0f;
             Time.timeScale = 0.5f;
@@ -44,13 +42,21 @@ public class SkillManager : MonoBehaviour
 
         if (_isAiming)
         {
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mousePos.z = 0;
+            Vector3 direction = (mousePos - _player.transform.position).normalized;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            _aimsight.transform.rotation = Quaternion.Euler(0, 0, angle);
+
             _aimTimer += Time.deltaTime;
             Time.fixedDeltaTime = this.fixedDeltaTime * Time.timeScale;
 
-            if(Input.GetButtonUp("Fire1") || _aimTimer >= _aimDuration)
+            if (Input.GetButtonUp("Fire1") || _aimTimer >= _aimDuration)
             {
                 Instantiate(_bullet, _player.transform.position, Quaternion.identity);
                 _isAiming = false;
+                _aimsight.SetActive(false);
+                _cooldownTimer = 0f;
                 Time.timeScale = 1.0f;
             }
         }

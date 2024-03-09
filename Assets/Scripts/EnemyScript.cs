@@ -38,9 +38,13 @@ public class EnemyScript : MonoBehaviour
         transform.right = _player.transform.position - transform.position;
 
         float distance = Vector3.Distance(transform.position, _player.transform.position);
-        if (Mathf.Abs(Mathf.Abs(transform.position.x) - Mathf.Abs(_player.transform.position.x)) >= 9f || Mathf.Abs(Mathf.Abs(transform.position.y) - Mathf.Abs(_player.transform.position.y)) >= 5f)
+        //if (Mathf.Abs(Mathf.Abs(transform.position.x) - Mathf.Abs(_player.transform.position.x)) >= 9f || Mathf.Abs(Mathf.Abs(transform.position.y) - Mathf.Abs(_player.transform.position.y)) >= 5f)
+        float x = transform.position.x;
+        float y = transform.position.y;
+        if(x <= _player.transform.position.x + 10f && x >= _player.transform.position.x - 10f && y <= _player.transform.position.y + 6f && y >= _player.transform.position.y - 6f)
         {
-            transform.Translate(Vector2.right * distance * Time.deltaTime);
+            return;
         }
+        transform.Translate(Vector2.right * (distance - 3f) * Time.deltaTime);
     }
 }
