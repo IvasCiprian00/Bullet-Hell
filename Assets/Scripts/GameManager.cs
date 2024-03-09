@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
 
     public void AddScore()
     {
-        _score += 5f;
+        _score += 0f;
     }
 
     public int GetScore() { return (int) _score; }

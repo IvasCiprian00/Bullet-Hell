@@ -16,11 +16,6 @@ public class BulletScript : MonoBehaviour
     private void Update()
     {
         transform.Translate(Vector3.up * 30 * Time.deltaTime);
-
-        if(Mathf.Abs(transform.position.x) >= 30f  || Mathf.Abs(transform.position.y) >= 15f)
-        {
-            Destroy(gameObject);
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -29,6 +24,10 @@ public class BulletScript : MonoBehaviour
         {
             GameObject.Find("Game Manager").GetComponent<GameManager>().AddScore();
             Destroy(collision.gameObject);
+            Destroy(gameObject);
+        }
+        if(collision.tag == "Obstacle")
+        {
             Destroy(gameObject);
         }
     }

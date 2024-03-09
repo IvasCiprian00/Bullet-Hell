@@ -12,6 +12,8 @@ public class ProjectileScript : MonoBehaviour
     [SerializeField] private Rigidbody2D _rigidbody;
     [SerializeField] private float _speed;
     [SerializeField] private float _rotationSpeed;
+
+    private bool _stopFollowing;
     private void Awake()
     {
         _gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
@@ -20,18 +22,29 @@ public class ProjectileScript : MonoBehaviour
         _rotationSpeed += Random.Range(-0.5f, 0.5f);
     }
 
-    private void Start()
+    private IEnumerator Start()
     {
         transform.up = _player.transform.position - transform.position;
-    }
+
+        yield return new WaitForSeconds(10f);
+        _stopFollowing = true;
+}
 
     void Update()
     {
-        if (_player != null)
+        if (_player == null)
         {
-            MoveTowardsPlayer();
-            RotateTowardsPlayer();
+            return;
         }
+
+        MoveTowardsPlayer();
+
+        if (_stopFollowing)
+        {
+            return;
+        }
+
+        RotateTowardsPlayer();
     }
 
     void MoveTowardsPlayer()
