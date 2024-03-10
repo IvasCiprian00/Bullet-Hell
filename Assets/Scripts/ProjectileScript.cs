@@ -27,6 +27,7 @@ public class ProjectileScript : MonoBehaviour
         transform.up = _player.transform.position - transform.position;
 
         yield return new WaitForSeconds(10f);
+        _gameManager.AddScore(0);
         _stopFollowing = true;
 }
 
@@ -68,7 +69,7 @@ public class ProjectileScript : MonoBehaviour
         }
         if(collision.tag == "Enemy")
         {
-            _gameManager.AddScore();
+            _gameManager.AddScore(0);
             Destroy(gameObject);
             Destroy(collision.gameObject);
         }

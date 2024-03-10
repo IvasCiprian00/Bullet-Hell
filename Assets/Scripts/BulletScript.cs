@@ -22,7 +22,7 @@ public class BulletScript : MonoBehaviour
     {
         if(collision.tag == "Enemy")
         {
-            GameObject.Find("Game Manager").GetComponent<GameManager>().AddScore();
+            GameObject.Find("Game Manager").GetComponent<GameManager>().AddScore(0);
             Destroy(collision.gameObject);
             Destroy(gameObject);
         }

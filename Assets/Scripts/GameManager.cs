@@ -20,9 +20,9 @@ public class GameManager : MonoBehaviour
         _aliveEnemiesMultiplier = _nrOfAliveEnemies * 1.3f;
     }
 
-    public void AddScore()
+    public void AddScore(int points)
     {
-        _score += 0f;
+        _score += points;
     }
 
     public int GetScore() { return (int) _score; }
