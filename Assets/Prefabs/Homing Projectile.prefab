@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 5510901731173220204}
   - component: {fileID: 5051171724376583352}
   m_Layer: 0
-  m_Name: Basic Projectile
+  m_Name: Homing Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -193,8 +193,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c25952ab48a1cc42b37387899b63437, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gameManager: {fileID: 0}
   _player: {fileID: 0}
   _rotationDirection: {fileID: 0}
   _rigidbody: {fileID: 5311608601841192980}
   _speed: 8
   _rotationSpeed: 3
+  _isHoming: 1

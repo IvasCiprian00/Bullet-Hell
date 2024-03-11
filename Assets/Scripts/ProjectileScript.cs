@@ -13,6 +13,7 @@ public class ProjectileScript : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] private float _rotationSpeed;
 
+    [SerializeField] private bool _isHoming;
     private bool _stopFollowing;
     private void Awake()
     {
@@ -45,7 +46,10 @@ public class ProjectileScript : MonoBehaviour
             return;
         }
 
-        RotateTowardsPlayer();
+        if (_isHoming)
+        {
+            RotateTowardsPlayer();
+        }
     }
 
     void MoveTowardsPlayer()
