@@ -6,6 +6,7 @@ using UnityEngine;
 public class SkillManager : MonoBehaviour
 {
     [SerializeField] GameObject _player;
+    [SerializeField] GameManager _gameManager;
 
     [SerializeField] private GameObject _bullet;
     [SerializeField] private GameObject _aimsight;
@@ -19,6 +20,7 @@ public class SkillManager : MonoBehaviour
     private void Awake()
     {
         _player = GameObject.Find("Player");
+        _gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         this.fixedDeltaTime = Time.fixedDeltaTime;
     }
 
@@ -26,6 +28,11 @@ public class SkillManager : MonoBehaviour
     private void Update()
     {
         ShootController();
+
+        if(_gameManager.GetScore() >= 50)
+        {
+            _aimCooldown = 8f;
+        }
     }
 
     public void ShootController()

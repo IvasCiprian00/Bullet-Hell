@@ -19,7 +19,6 @@ public class ProjectileScript : MonoBehaviour
     {
         _gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         _player = GameObject.Find("Player");
-        _speed += Random.Range(-1f, 0.5f);
         _rotationSpeed += Random.Range(-0.5f, 0.5f);
     }
 
@@ -27,9 +26,12 @@ public class ProjectileScript : MonoBehaviour
     {
         transform.up = _player.transform.position - transform.position;
 
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(15f);
         _gameManager.AddScore(0);
         _stopFollowing = true;
+        GetComponent<Collider2D>().enabled = false;
+        yield return new WaitForSeconds(5f);
+        Destroy(gameObject);
 }
 
     void Update()
@@ -81,5 +83,11 @@ public class ProjectileScript : MonoBehaviour
         {
             _player.GetComponent<PlayerScript>().TakeDamage();
         }
+    }
+
+    public void SetSpeed(int x)
+    {
+        _speed = x;
+        _speed += Random.Range(-1f, 0.5f);
     }
 }
