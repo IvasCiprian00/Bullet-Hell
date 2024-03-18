@@ -24,7 +24,6 @@ public class ProjectileScript : MonoBehaviour
 
     private IEnumerator Start()
     {
-        transform.up = _player.transform.position - transform.position;
 
         yield return new WaitForSeconds(15f);
         _gameManager.AddScore(0);

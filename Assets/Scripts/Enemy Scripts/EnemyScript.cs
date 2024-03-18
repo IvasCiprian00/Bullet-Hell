@@ -32,7 +32,8 @@ public class EnemyScript : MonoBehaviour
         if(_timer >= _fireRate)
         {
             _timer = 0;
-            Instantiate(_projectile, _projSpawnLocation.transform.position, transform.rotation);
+            GameObject reference = Instantiate(_projectile, _projSpawnLocation.transform.position, transform.rotation);
+            reference.transform.up = _player.transform.position - reference.transform.position;
         }
     }
 
