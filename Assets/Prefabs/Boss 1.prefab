@@ -242,7 +242,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 3625043607559282579, guid: 19fb86013d8c24d6cb8410c0aadf30fa, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -261,6 +261,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1796948724988168700}
+  - component: {fileID: 2450371222948731600}
   m_Layer: 0
   m_Name: Boss 1
   m_TagString: Untagged
@@ -287,6 +288,23 @@ Transform:
   - {fileID: 1504755468542244002}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2450371222948731600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8049170102531299753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0d1b299cfd9cc744ba3b049ba797a5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _orbContainer: {fileID: 8470617044721847489}
+  _rotationSpeed: 100
+  _minSpeed: 0
+  _fireRate: 0.5
+  _audioSource: {fileID: 0}
 --- !u!1 &8470617044721847489
 GameObject:
   m_ObjectHideFlags: 0
@@ -296,7 +314,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1504755468542244002}
-  - component: {fileID: 1029632541247729145}
   m_Layer: 0
   m_Name: Orbs
   m_TagString: Untagged
@@ -327,19 +344,6 @@ Transform:
   - {fileID: 7256504279591139033}
   m_Father: {fileID: 1796948724988168700}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1029632541247729145
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8470617044721847489}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65fb0cb86f096e14a99d2a42d50d20fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _rotationSpeed: 100
 --- !u!1001 &387319343149616064
 PrefabInstance:
   m_ObjectHideFlags: 0
