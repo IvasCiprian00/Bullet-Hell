@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Net;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] _enemies;
+    [SerializeField] private GameObject[] _bosses;
     [SerializeField] private float _spawnInterval;
     [SerializeField] private float _maxSpawnInterval;
     [SerializeField] private GameObject _player;
     private int phase;
+    private bool _bossIsSpawned = false;
 
     private float _timer;
     private float _spawnTimer;
@@ -33,9 +36,13 @@ public class SpawnManager : MonoBehaviour
 
         }
 
-        if(_timer >= 30)
+        if(_timer >= 20)
         {
             phase = 2;
+        }
+        if (_timer >= 40)
+        {
+            phase = 5;
         }
 
         switch (phase) 
@@ -45,6 +52,12 @@ public class SpawnManager : MonoBehaviour
                 break;
             case 2:
                 Phase2();
+                break;
+            case 5:
+                if (!_bossIsSpawned)
+                {
+                    Phase5();
+                }
                 break;
             default: 
                 break;
@@ -79,6 +92,13 @@ public class SpawnManager : MonoBehaviour
         _spawnTimer = 0;
         GetValidSpawnPosition();
         Instantiate(_enemies[1], new Vector3(_xPos, _yPos, 0), Quaternion.identity);
+    }
+
+    public void Phase5()
+    {
+        _bossIsSpawned = true;
+        GetValidSpawnPosition();
+        Instantiate(_bosses[0], new Vector3(_xPos, _yPos, 0), Quaternion.identity);
     }
 
     public void GetValidSpawnPosition()

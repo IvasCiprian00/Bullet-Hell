@@ -20,7 +20,7 @@ public class BulletScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Enemy")
+        if(collision.tag == "Enemy" || collision.tag == "Orb")
         {
             GameObject.Find("Game Manager").GetComponent<GameManager>().AddScore(0);
             Destroy(collision.gameObject);

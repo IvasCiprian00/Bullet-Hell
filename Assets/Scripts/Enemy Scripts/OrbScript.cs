@@ -7,23 +7,13 @@ public class OrbScript : MonoBehaviour
     [SerializeField] private GameObject _projectile;
     float timer;
 
-    public void Update()
-    {
-        timer += Time.deltaTime;
-
-        if(timer >= 1)
-        {
-            Shoot();
-            timer = 0;
-        }
-    }
-
     public void Shoot()
     {
-        for(float i = 0.65f; i <= 1.4f; i += 0.35f)
-        {
+        //for(float i = 0.6f; i <= 1.45f; i += 0.4f)
+        //{
             GameObject reference = Instantiate(_projectile, transform.position, Quaternion.identity);
-            reference.transform.rotation = transform.rotation * new Quaternion(0, 0, -i, 1);
-       }
+            reference.transform.rotation = transform.rotation * new Quaternion(0, 0, -1, 1);
+            reference.GetComponent<ProjectileScript>().SetFixedSpeed(5);
+       //}
     }
 }

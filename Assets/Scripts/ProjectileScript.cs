@@ -14,7 +14,9 @@ public class ProjectileScript : MonoBehaviour
     [SerializeField] private float _rotationSpeed;
 
     [SerializeField] private bool _isHoming;
+    private bool _friendlyFire;
     private bool _stopFollowing;
+
     private void Awake()
     {
         _gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
@@ -24,12 +26,18 @@ public class ProjectileScript : MonoBehaviour
 
     private IEnumerator Start()
     {
+        yield return new WaitForSeconds(0.5f);
+
+        _friendlyFire = true;
 
         yield return new WaitForSeconds(15f);
+
         _gameManager.AddScore(0);
         _stopFollowing = true;
         GetComponent<Collider2D>().enabled = false;
+
         yield return new WaitForSeconds(5f);
+
         Destroy(gameObject);
 }
 
@@ -72,7 +80,7 @@ public class ProjectileScript : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        if(collision.tag == "Enemy")
+        if((collision.tag == "Enemy" || collision.tag == "Orb" ) && _friendlyFire)
         {
             _gameManager.AddScore(0);
             Destroy(gameObject);
@@ -88,5 +96,10 @@ public class ProjectileScript : MonoBehaviour
     {
         _speed = x;
         _speed += Random.Range(-1f, 0.5f);
+    }
+
+    public void SetFixedSpeed(int x)
+    {
+        _speed = x;
     }
 }
