@@ -30,5 +30,10 @@ public class BulletScript : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        if(collision.tag == "BossPart")
+        {
+            collision.transform.parent.GetComponent<RobotBossScript>().TakeDamage(1);
+            Destroy(gameObject);
+        }
     }
 }
