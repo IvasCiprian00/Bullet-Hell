@@ -11,94 +11,84 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private float _spawnInterval;
     [SerializeField] private float _maxSpawnInterval;
     [SerializeField] private GameObject _player;
-    private int phase;
-    private bool _bossIsSpawned = false;
 
-    private float _timer;
-    private float _spawnTimer;
     private float _xPos;
     private float _yPos;
 
 
     private void Awake()
     {
-        phase = 1;
         _player = GameObject.Find("Player");
+
+        StartCoroutine(Phase1());
     }
 
-    private void Update()
+    public IEnumerator Phase1()
     {
-        _timer += Time.deltaTime;
+        yield return new WaitForSeconds(3f);
 
-        if(_player == null) 
+        SpawnEnemy(_enemies[0], 1);
+
+        yield return new WaitForSeconds(5f);
+
+        SpawnEnemy(_enemies[0], 1);
+
+        yield return new WaitForSeconds(5f);
+
+        SpawnEnemy(_enemies[0], 2);
+
+        yield return new WaitForSeconds(2f);
+
+        SpawnEnemy(_enemies[0], 1);
+
+        yield return new WaitForSeconds(2f);
+
+        //StartCorountine(Phase2());
+    }
+
+    public IEnumerator Phase2()
+    {
+        SpawnEnemy(_enemies[1], 2);
+
+        yield return new WaitForSeconds(3f);
+
+        SpawnEnemy(_enemies[1], 3);
+
+        yield return new WaitForSeconds(5f);
+
+        SpawnEnemy(_enemies[0], 1);
+        SpawnEnemy(_enemies[1], 3);
+
+        yield return new WaitForSeconds(5f);
+
+        SpawnEnemy(_enemies[0], 2);
+        SpawnEnemy(_enemies[1], 2);
+
+        yield return new WaitForSeconds(10f);
+
+        StartCoroutine(EyeBossPhase());
+    }
+
+    public IEnumerator EyeBossPhase()
+    {
+        SpawnEnemy(_bosses[0], 1);
+
+        yield return new WaitForSeconds(40f);
+    }
+
+    public void SpawnEnemy(GameObject enemy, int enemyCount)
+    {
+        if(_player == null)
         {
             return;
-
         }
 
-        if(_timer >= 20)
+        for(int i = 0; i < enemyCount; i++)
         {
-            phase = 2;
+            GetValidSpawnPosition();
+
+            Instantiate(enemy, new Vector3(_xPos, _yPos, 0), Quaternion.identity);
         }
-        if (_timer >= 40)
-        {
-            phase = 5;
-        }
-
-        switch (phase) 
-        {
-            case 1:
-                Phase1();
-                break;
-            case 2:
-                Phase2();
-                break;
-            case 5:
-                if (!_bossIsSpawned)
-                {
-                    Phase5();
-                }
-                break;
-            default: 
-                break;
-        }
-
-    }
-
-    public void Phase1()
-    {
-        _spawnTimer += Time.deltaTime;
-
-        if (_spawnTimer < _spawnInterval)
-        {
-            return;
-        }
-
-        _spawnTimer = 0;
-        _spawnInterval -= 0.2f;
-        GetValidSpawnPosition();
-        Instantiate(_enemies[0], new Vector3(_xPos, _yPos, 0), Quaternion.identity);
-    }
-
-    public void Phase2()
-    {
-        _spawnTimer += Time.deltaTime;
-
-        if (_spawnTimer < _spawnInterval)
-        {
-            return;
-        }
-
-        _spawnTimer = 0;
-        GetValidSpawnPosition();
-        Instantiate(_enemies[1], new Vector3(_xPos, _yPos, 0), Quaternion.identity);
-    }
-
-    public void Phase5()
-    {
-        _bossIsSpawned = true;
-        GetValidSpawnPosition();
-        Instantiate(_bosses[0], new Vector3(_xPos, _yPos, 0), Quaternion.identity);
     }
 
     public void GetValidSpawnPosition()
