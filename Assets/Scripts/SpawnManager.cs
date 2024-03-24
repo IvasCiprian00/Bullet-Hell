@@ -29,21 +29,21 @@ public class SpawnManager : MonoBehaviour
 
         SpawnEnemy(_enemies[0], 1);
 
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(7f);
 
         SpawnEnemy(_enemies[0], 1);
 
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(7f);
 
         SpawnEnemy(_enemies[0], 2);
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(5f);
 
-        SpawnEnemy(_enemies[0], 1);
+        SpawnEnemy(_enemies[0], 3);
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(7f);
 
-        //StartCorountine(Phase2());
+        StartCoroutine(Phase2());
     }
 
     public IEnumerator Phase2()

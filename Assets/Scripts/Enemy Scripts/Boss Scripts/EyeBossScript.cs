@@ -12,13 +12,13 @@ public class EyeBossScript : MonoBehaviour
     [SerializeField] private float _rotationSpeed;
     [SerializeField] private float _minSpeed;
     [SerializeField] private float _fireRate;
-    [SerializeField] AudioSource _audioSource;
+    //[SerializeField] AudioSource _audioSource;
     private float _timer;
 
     void Start()
     {
         _player = GameObject.Find("Player");
-        _audioSource = GetComponent<AudioSource>();
+        //_audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -47,7 +47,7 @@ public class EyeBossScript : MonoBehaviour
 
             GameObject[] orbs = GameObject.FindGameObjectsWithTag("Orb");
 
-            _audioSource.Play();
+            //_audioSource.Play();
 
             for(int i = 0; i < orbs.Length; i++)
             {

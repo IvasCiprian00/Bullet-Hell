@@ -102,4 +102,6 @@ public class ProjectileScript : MonoBehaviour
     {
         _speed = x;
     }
+
+    public float GetSpeed() { return _speed; }
 }
