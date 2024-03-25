@@ -34,7 +34,6 @@ public class PlayerScript : MonoBehaviour
                 return;
             }
 
-            GetComponent<Collider2D>().enabled = true;
             _isDodging = false;
         }
     }
@@ -63,7 +62,6 @@ public class PlayerScript : MonoBehaviour
     {
         _isDodging = true;
         _canDodge = false;
-        GetComponent<Collider2D>().enabled = false;
 
         float x = Input.GetAxisRaw("Horizontal");
         float y = Input.GetAxisRaw("Vertical");
@@ -82,8 +80,18 @@ public class PlayerScript : MonoBehaviour
         _canDodge = true;
     }
 
+    public void RefreshDodgeCooldown()
+    {
+        _canDodge = true;
+    }
+
     public void TakeDamage()
     {
+        if(_isDodging)
+        {
+            return;
+        }
+
         Camera.main.transform.parent = null;
         Destroy(gameObject);
     }
@@ -99,4 +107,6 @@ public class PlayerScript : MonoBehaviour
             TakeDamage();
         }
     }
+
+    public bool IsDodging() { return _isDodging; }
 }
