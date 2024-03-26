@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal;
 using UnityEngine;
 
 public class DiamondBossScript : MonoBehaviour
 {
     private GameObject _player;
+    [SerializeField] private int _hp;
 
     [Header("Laser Attack")]
     [SerializeField] private GameObject _laser;
@@ -140,5 +142,24 @@ public class DiamondBossScript : MonoBehaviour
         yield return new WaitForSeconds(_spikeCooldown);
 
         _spikeCanFire = true;
+    }
+
+    public void TakeDamage(int dmg)
+    {
+        _hp -= dmg;
+
+        if(_hp <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "Bullet")
+        {
+            Destroy(collision.gameObject);
+            TakeDamage(1);
+        }
     }
 }

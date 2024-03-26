@@ -99,11 +99,7 @@ public class PlayerScript : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Enemy")
-        {
-            TakeDamage();
-        }
-        if(collision.tag == "Hazard")
+        if(collision.tag == "Enemy" || collision.tag == "Hazard" || collision.tag == "Boss")
         {
             TakeDamage();
         }

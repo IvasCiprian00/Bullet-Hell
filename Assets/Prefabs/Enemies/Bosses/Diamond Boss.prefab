@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 2549520415558505384}
   - component: {fileID: 8393489875531550977}
   m_Layer: 0
-  m_Name: Final Boss
+  m_Name: Diamond Boss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -145,6 +145,10 @@ MonoBehaviour:
   _waveSpeed: 10
   _waveIsActive: 0
   _waveCanFire: 1
+  _spike: {fileID: 0}
+  _spikeCooldown: 0
+  _spikeCount: 0
+  _spikeCanFire: 0
 --- !u!1 &6954774460434354552
 GameObject:
   m_ObjectHideFlags: 0
