@@ -1379,6 +1379,7 @@ MonoBehaviour:
   _maxSpeed: 10
   _rigidbody: {fileID: 911857421}
   _dodgeCooldown: 5
+  _dodgeForce: 75
   _canDodge: 0
 --- !u!61 &911857424
 BoxCollider2D:

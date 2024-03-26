@@ -6,6 +6,7 @@ public class WaveScript : MonoBehaviour
 {
     private UIManager _uiManager;
     private Rigidbody2D _rigidbody;
+    private float _speed;
 
     private void Start()
     {
@@ -15,7 +16,7 @@ public class WaveScript : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(Vector3.right * 10 * Time.deltaTime);
+        transform.Translate(Vector3.right * _speed * Time.deltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -31,5 +32,10 @@ public class WaveScript : MonoBehaviour
 
             _uiManager.DisplayDodgeRefreshed();
         }
+    }
+
+    public void SetSpeed(float speed)
+    {
+        _speed = speed;
     }
 }

@@ -11,6 +11,7 @@ public class PlayerScript : MonoBehaviour
 
     [Header("Dodge Section")]
     [SerializeField] private float _dodgeCooldown;
+    [SerializeField] private float _dodgeForce;
     [SerializeField] private bool _canDodge;
     private bool _isDodging;
 
@@ -67,7 +68,7 @@ public class PlayerScript : MonoBehaviour
         float y = Input.GetAxisRaw("Vertical");
 
         _rigidbody.velocity = Vector2.zero;
-        float dodgeForce = 100 / Mathf.Sqrt(x * x + y * y);
+        float dodgeForce = _dodgeForce / Mathf.Sqrt(x * x + y * y);
         _rigidbody.AddForce (new Vector2(x, y) * dodgeForce, ForceMode2D.Impulse);
 
         StartCoroutine(RefreshDodge());
