@@ -25,6 +25,12 @@ public class DiamondBossScript : MonoBehaviour
     [SerializeField] private bool _waveIsActive;
     [SerializeField] private bool _waveCanFire;
 
+    [Header("Spike Attack")]
+    [SerializeField] private GameObject _spike;
+    [SerializeField] private float _spikeCooldown;
+    [SerializeField] private float _spikeCount;
+    [SerializeField] private bool _spikeCanFire;
+
 
     public void Awake()
     {
@@ -47,6 +53,11 @@ public class DiamondBossScript : MonoBehaviour
         if(_waveCanFire && !_laserIsActive)
         {
             StartCoroutine(FireWaves());
+        }
+
+        if (_spikeCanFire)
+        {
+            StartCoroutine(FireSpikes());
         }
     }
 
@@ -109,5 +120,25 @@ public class DiamondBossScript : MonoBehaviour
         yield return new WaitForSeconds(_waveCooldown);
 
         _waveCanFire = true;
+    }
+
+    public IEnumerator FireSpikes()
+    {
+        _spikeCanFire = false;
+
+        for(int i = 0; i < _spikeCount; i++) 
+        {
+            //Instantiate spikes around player 
+            float x = Random.Range(_player.transform.position.x - 5f, _player.transform.position.x + 5f);
+            float y = Random.Range(_player.transform.position.y - 4f, _player.transform.position.y + 4f);
+
+            //should check if position is valid(so they don't spawn outside the map or on top of the boss
+
+            Instantiate(_spike, new Vector3(x, y, 0), Quaternion.identity);
+        }
+
+        yield return new WaitForSeconds(_spikeCooldown);
+
+        _spikeCanFire = true;
     }
 }

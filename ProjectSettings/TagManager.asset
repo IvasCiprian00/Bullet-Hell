@@ -9,6 +9,7 @@ TagManager:
   - Orb
   - BossPart
   - Hazard
+  - Spike
   layers:
   - Default
   - TransparentFX
