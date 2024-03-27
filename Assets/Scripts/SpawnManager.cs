@@ -11,6 +11,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private float _spawnInterval;
     [SerializeField] private float _maxSpawnInterval;
     [SerializeField] private GameObject _player;
+    [SerializeField] private GameObject _enemyIndicator;
 
     private float _xPos;
     private float _yPos;
@@ -87,7 +88,9 @@ public class SpawnManager : MonoBehaviour
         {
             GetValidSpawnPosition();
 
-            Instantiate(enemy, new Vector3(_xPos, _yPos, 0), Quaternion.identity);
+            GameObject enemyReference = Instantiate(enemy, new Vector3(_xPos, _yPos, 0), Quaternion.identity);
+            GameObject reference = Instantiate(_enemyIndicator, Vector3.zero, Quaternion.identity, GameObject.Find("Canvas").transform);
+            reference.GetComponent<EnemyIndicatorScript>().SetEnemy(enemyReference);
         }
     }
 
