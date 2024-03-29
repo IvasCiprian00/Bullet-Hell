@@ -9,6 +9,8 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] private float _fireRate;
     [SerializeField] private GameObject _projSpawnLocation;
     [SerializeField] private int _projectileSpeed;
+    [SerializeField] private float _accuracy;
+    [SerializeField] private bool _isPredicting;
     private float _timer;
 
     private void Start()
@@ -31,10 +33,36 @@ public class EnemyScript : MonoBehaviour
 
         if(_timer >= _fireRate)
         {
-            _timer = 0;
-            GameObject reference = Instantiate(_projectile, _projSpawnLocation.transform.position, transform.rotation);
-            reference.transform.up = _player.transform.position - reference.transform.position;
+            if (_isPredicting)
+            {
+                FirePredicting();
+            }
+            else
+            {
+                FireNormal();
+            }
         }
+    }
+
+    public void FirePredicting()
+    {
+        _timer = 0;
+        Vector2 playerSpeed = _player.GetComponent<Rigidbody2D>().velocity;
+        float distance = Vector2.Distance(gameObject.transform.position, _player.transform.position);
+        Vector3 futurePosition = _player.transform.position + new Vector3(playerSpeed.x, playerSpeed.y, 0) * (distance / _projectileSpeed);
+
+        GameObject reference = Instantiate(_projectile, _projSpawnLocation.transform.position, transform.rotation);
+        reference.transform.up = futurePosition - reference.transform.position;
+    }
+
+    public void FireNormal()
+    {
+        _timer = 0;
+        GameObject reference = Instantiate(_projectile, _projSpawnLocation.transform.position, transform.rotation);
+        reference.transform.up = _player.transform.position - reference.transform.position;
+
+        float deviation = Random.Range(-_accuracy, _accuracy);
+        reference.transform.Rotate(0, 0, deviation);
     }
 
     public void Movement()
@@ -45,6 +73,7 @@ public class EnemyScript : MonoBehaviour
         //if (Mathf.Abs(Mathf.Abs(transform.position.x) - Mathf.Abs(_player.transform.position.x)) >= 9f || Mathf.Abs(Mathf.Abs(transform.position.y) - Mathf.Abs(_player.transform.position.y)) >= 5f)
         float x = transform.position.x;
         float y = transform.position.y;
+
         if(x <= _player.transform.position.x + 10f && x >= _player.transform.position.x - 10f && y <= _player.transform.position.y + 6f && y >= _player.transform.position.y - 6f)
         {
             return;

@@ -265,7 +265,7 @@ GameObject:
   - component: {fileID: 5510901731173220204}
   - component: {fileID: -1307185460094317787}
   m_Layer: 0
-  m_Name: Ranged Normal Enemy
+  m_Name: Ranged Predicting Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -368,4 +368,5 @@ MonoBehaviour:
   _fireRate: 4
   _projSpawnLocation: {fileID: 6748366471149624876}
   _projectileSpeed: 8
-  _accuracy: 15
+  _accuracy: 0
+  _isPredicting: 1

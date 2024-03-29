@@ -20,10 +20,6 @@ public class OscillatingScript : MonoBehaviour
         a = Mathf.Sin(_timer * Mathf.PI);
         c = Mathf.Sqrt(a * a + b * b);
 
-        transform.localPosition = new Vector3(a, 0, 0);
-
-        float angle = Mathf.Asin(a / c);
-        Debug.Log(angle);
-        transform.rotation = new Quaternion(0, 0, angle, 1);
+        transform.localPosition = new Vector3(a * 2, 0, 0);
     }
 }

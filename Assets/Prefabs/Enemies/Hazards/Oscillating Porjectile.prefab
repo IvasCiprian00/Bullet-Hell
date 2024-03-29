@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.2, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8115192699409628779}
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: -1361656703
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
+  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -107,8 +107,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8115192699409628779}
   - component: {fileID: 5311608601841192980}
-  - component: {fileID: 5510901731173220204}
   - component: {fileID: 5051171724376583352}
+  - component: {fileID: 8041876031281221857}
   m_Layer: 0
   m_Name: Oscillating Porjectile
   m_TagString: Untagged
@@ -159,8 +159,27 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!70 &5510901731173220204
-CapsuleCollider2D:
+--- !u!114 &5051171724376583352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8399809645883171476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c25952ab48a1cc42b37387899b63437, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameManager: {fileID: 0}
+  _player: {fileID: 0}
+  _rotationDirection: {fileID: 0}
+  _rigidbody: {fileID: 5311608601841192980}
+  _speed: 4
+  _rotationSpeed: 0
+  _isHoming: 0
+--- !u!58 &8041876031281221857
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -188,28 +207,9 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.1, y: 0.4}
-  m_Direction: 0
---- !u!114 &5051171724376583352
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8399809645883171476}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c25952ab48a1cc42b37387899b63437, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _gameManager: {fileID: 0}
-  _player: {fileID: 0}
-  _rotationDirection: {fileID: 0}
-  _rigidbody: {fileID: 5311608601841192980}
-  _speed: 0
-  _rotationSpeed: 3
-  _isHoming: 0
+  serializedVersion: 2
+  m_Radius: 0.25
