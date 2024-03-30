@@ -103,10 +103,10 @@ public class SpawnManager : MonoBehaviour
         do
         {
             isValid = true;
-            x = Random.Range(-14f, 14f);
-            y = Random.Range(-9f, 9f);
+            x = Random.Range(-25f, 25f);
+            y = Random.Range(-25f, 25f);
 
-            if (x <= _player.transform.position.x + 9f && x >= _player.transform.position.x - 9f && y <= _player.transform.position.y + 5f && y >= _player.transform.position.y - 5f)
+            if (Vector2.Distance(new Vector2(x, y), Vector2.zero) > 25 || Vector2.Distance(_player.transform.position, new Vector2(x, y)) <= 10)
             {
                 isValid = false;
             }

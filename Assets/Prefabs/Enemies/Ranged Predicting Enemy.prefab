@@ -364,9 +364,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 0}
-  _projectile: {fileID: 8399809645883171476, guid: 91d6cafa2377f774c9136c22efe7ebff, type: 3}
-  _fireRate: 4
+  _projectile: {fileID: 8399809645883171476, guid: 964d6568b604cea4ba9524b4f63bcefe, type: 3}
+  _fireRate: 2
   _projSpawnLocation: {fileID: 6748366471149624876}
-  _projectileSpeed: 8
+  _projectileSpeed: 30
   _accuracy: 0
   _isPredicting: 1
