@@ -9,6 +9,7 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] private float _fireRate;
     [SerializeField] private GameObject _projSpawnLocation;
     [SerializeField] private int _projectileSpeed;
+    [SerializeField] private float _projectileRotationSpeed;
     [SerializeField] private float _accuracy;
     [SerializeField] private bool _isPredicting;
     private float _timer;
@@ -18,6 +19,7 @@ public class EnemyScript : MonoBehaviour
         _player = GameObject.Find("Player");
 
         _projectile.GetComponent<ProjectileScript>().SetSpeed(_projectileSpeed);
+        _projectile.GetComponent<ProjectileScript>().SetRotationSpeed(_projectileRotationSpeed);
     }
 
     private void Update()

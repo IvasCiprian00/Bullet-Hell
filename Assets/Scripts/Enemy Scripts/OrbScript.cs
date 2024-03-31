@@ -9,11 +9,8 @@ public class OrbScript : MonoBehaviour
 
     public void Shoot()
     {
-        //for(float i = 0.6f; i <= 1.45f; i += 0.4f)
-        //{
-            GameObject reference = Instantiate(_projectile, transform.position, Quaternion.identity);
-            reference.transform.rotation = transform.rotation * new Quaternion(0, 0, -1, 1);
-            reference.GetComponent<ProjectileScript>().SetFixedSpeed(5);
-       //}
+        GameObject reference = Instantiate(_projectile, transform.position, Quaternion.identity);
+        reference.transform.rotation = transform.rotation * new Quaternion(0, 0, -1, 1);
+        reference.GetComponent<ProjectileScript>().SetFixedSpeed(5);
     }
 }

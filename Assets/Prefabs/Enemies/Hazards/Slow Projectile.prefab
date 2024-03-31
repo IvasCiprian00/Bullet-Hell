@@ -193,8 +193,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c25952ab48a1cc42b37387899b63437, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gameManager: {fileID: 0}
   _player: {fileID: 0}
   _rotationDirection: {fileID: 0}
   _rigidbody: {fileID: 5311608601841192980}
-  _speed: 4
+  _speed: 14
   _rotationSpeed: 10
+  _isHoming: 1

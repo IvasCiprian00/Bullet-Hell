@@ -21,7 +21,6 @@ public class ProjectileScript : MonoBehaviour
     {
         _gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         _player = GameObject.Find("Player");
-        _rotationSpeed += Random.Range(-0.5f, 0.5f);
     }
 
     private IEnumerator Start()
@@ -80,7 +79,7 @@ public class ProjectileScript : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        if((collision.tag == "Enemy" || collision.tag == "Orb" ) && _friendlyFire)
+        if((collision.tag == "Enemy") && _friendlyFire)
         {
             _gameManager.AddScore(0);
             Destroy(gameObject);
@@ -101,6 +100,17 @@ public class ProjectileScript : MonoBehaviour
     public void SetFixedSpeed(int x)
     {
         _speed = x;
+    }
+
+    public void SetRotationSpeed(float x)
+    {
+        _rotationSpeed = x;
+        _rotationSpeed += Random.Range(-0.5f, 0.5f);
+    }
+
+    public void SetFixedRotationSpeed(float x)
+    {
+        _rotationSpeed = x;
     }
 
     public float GetSpeed() { return _speed; }

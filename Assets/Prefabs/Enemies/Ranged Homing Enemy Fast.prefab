@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  m_Color: {r: 0.2830189, g: 0.15485162, b: 0, a: 1}
+  m_Color: {r: 0.24528301, g: 0, b: 0.10219163, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -265,7 +265,7 @@ GameObject:
   - component: {fileID: 5510901731173220204}
   - component: {fileID: -1307185460094317787}
   m_Layer: 0
-  m_Name: Ranged Normal Enemy
+  m_Name: Ranged Homing Enemy Fast
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -364,9 +364,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 0}
-  _projectile: {fileID: 8399809645883171476, guid: 91d6cafa2377f774c9136c22efe7ebff, type: 3}
+  _projectile: {fileID: 8399809645883171476, guid: 598af4373a70f0548a22e94e45ce336e, type: 3}
   _fireRate: 4
   _projSpawnLocation: {fileID: 6748366471149624876}
-  _projectileSpeed: 10
-  _accuracy: 15
+  _projectileSpeed: 12
+  _projectileRotationSpeed: 3
+  _accuracy: 0
   _isPredicting: 0

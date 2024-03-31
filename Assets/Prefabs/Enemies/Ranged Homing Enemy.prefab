@@ -367,6 +367,7 @@ MonoBehaviour:
   _projectile: {fileID: 8399809645883171476, guid: 598af4373a70f0548a22e94e45ce336e, type: 3}
   _fireRate: 4
   _projSpawnLocation: {fileID: 6748366471149624876}
-  _projectileSpeed: 12
+  _projectileSpeed: 8
+  _projectileRotationSpeed: 4
   _accuracy: 0
   _isPredicting: 0

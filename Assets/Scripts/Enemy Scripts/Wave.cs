@@ -1,61 +1,45 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Net;
 using Unity.VisualScripting;
 using UnityEngine;
-using Random = UnityEngine.Random;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
-public class SpawnManager : MonoBehaviour
+[System.Serializable]
+public abstract class Wave : MonoBehaviour
 {
-    [Serializable] public struct Waves
-    {
-        public GameObject[] enemies;
-        public int[] enemyCount;
-        public float[] timeGiven;
-    };
-
-    [SerializeField] private Waves[] _waves;
-    [SerializeField] private GameObject[] _enemies;
-    [SerializeField] private GameObject[] _bosses;
-    [SerializeField] private float _spawnInterval;
-    [SerializeField] private float _maxSpawnInterval;
-    [SerializeField] private GameObject _player;
+    private GameObject _player;
     [SerializeField] private GameObject _enemyIndicator;
 
-    private float _xPos;
-    private float _yPos;
+    [SerializeField] private GameObject[] _enemies;
+    [SerializeField] private int[] _enemyCount;
+    [SerializeField] private float[] _timeGiven;
 
+    float _xPos;
+    float _yPos;
 
-    private void Awake()
+    public void Start()
     {
         _player = GameObject.Find("Player");
-
-        StartCoroutine(SpawnWaves());
     }
 
-    public IEnumerator SpawnWaves()
+    public IEnumerator SpawnWave()
     {
-        for (int i = 0; i < _waves.Length; i++)
+        for(int i = 0; i < _enemies.Length; i++)
         {
-            for(int j = 0; j < _waves[i].enemies.Length; j++)
-            {
-                SpawnEnemy(_waves[i].enemies[j], _waves[i].enemyCount[j]);
+            SpawnEnemy(_enemies[i], _enemyCount[i]);
 
-                yield return new WaitForSeconds(_waves[i].timeGiven[j]);
-            }
+            yield return new WaitForSeconds(_timeGiven[i]);
         }
     }
 
-
     public void SpawnEnemy(GameObject enemy, int enemyCount)
     {
-        if(_player == null)
+        if (_player == null)
         {
             return;
         }
 
-        for(int i = 0; i < enemyCount; i++)
+        for (int i = 0; i < enemyCount; i++)
         {
             GetValidSpawnPosition();
 

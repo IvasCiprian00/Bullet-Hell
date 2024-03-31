@@ -557,6 +557,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 229f7d37acde7ac4abb95866fc12886d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _waves:
+  - enemies:
+    - {fileID: 8399809645883171476, guid: f57a1c538ebb38941a975067a9726b27, type: 3}
+    - {fileID: 8399809645883171476, guid: f57a1c538ebb38941a975067a9726b27, type: 3}
+    - {fileID: 8399809645883171476, guid: f57a1c538ebb38941a975067a9726b27, type: 3}
+    - {fileID: 8399809645883171476, guid: f57a1c538ebb38941a975067a9726b27, type: 3}
+    - {fileID: 8399809645883171476, guid: f57a1c538ebb38941a975067a9726b27, type: 3}
+    enemyCount: 0100000001000000010000000200000001000000
+    timeGiven:
+    - 10
+    - 7
+    - 5
+    - 10
+    - 10
+  - enemies:
+    - {fileID: 8399809645883171476, guid: f57a1c538ebb38941a975067a9726b27, type: 3}
+    - {fileID: 8399809645883171476, guid: 88c1c1b49696a174291f51318977f02b, type: 3}
+    - {fileID: 8399809645883171476, guid: 88c1c1b49696a174291f51318977f02b, type: 3}
+    - {fileID: 8399809645883171476, guid: 88c1c1b49696a174291f51318977f02b, type: 3}
+    enemyCount: 01000000010000000200000001000000
+    timeGiven:
+    - 0
+    - 10
+    - 5
+    - 10
+  - enemies:
+    - {fileID: 8049170102531299753, guid: cda77f0c01f91e546ab06825933bca19, type: 3}
+    enemyCount: 01000000
+    timeGiven:
+    - 30
   _enemies:
   - {fileID: 8399809645883171476, guid: f57a1c538ebb38941a975067a9726b27, type: 3}
   - {fileID: 8399809645883171476, guid: 88c1c1b49696a174291f51318977f02b, type: 3}
@@ -644,7 +674,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 7.5
+  orthographic size: 6.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1291,8 +1321,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a9fa3607a19b8c4e83b941a215e8547, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 20
-  _maxSpeed: 15
+  _speed: 15
+  _maxSpeed: 10
   _rigidbody: {fileID: 911857421}
   _dodgeCooldown: 5
   _dodgeForce: 75
@@ -1304,7 +1334,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 911857420}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -1713,8 +1743,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -175216829
-  m_SortingLayer: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 0.754717, g: 0.754717, b: 0.754717, a: 1}
