@@ -11,7 +11,12 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if(Vector2.Distance(_player.transform.position, Vector2.zero) >= 40)
+        if(_player == null)
+        {
+            return;
+        }
+
+        if(Vector2.Distance(_player.transform.position, Vector2.zero) >= 25)
         {
             _player.GetComponent<PlayerScript>().TakeDamage();
         }

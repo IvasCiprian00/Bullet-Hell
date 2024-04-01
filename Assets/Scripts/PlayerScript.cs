@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
+    [SerializeField] private FixedJoystick _moveJoystick;
     [SerializeField] private float _speed;
     [SerializeField] private float _maxSpeed;
     [SerializeField] private Rigidbody2D _rigidbody;
@@ -25,7 +26,7 @@ public class PlayerScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && _canDodge)
         {
-            Dodge();
+            JoystickDodge();
         }
 
         if (_isDodging)
@@ -46,7 +47,18 @@ public class PlayerScript : MonoBehaviour
             return;
         }
 
-        Movement();
+        JoystickMovement();
+    }
+
+    public void JoystickMovement()
+    {
+        //Debug.Log(_joystick.Horizontal);
+        _rigidbody.AddForce(new Vector2(_moveJoystick.Horizontal, _moveJoystick.Vertical) * _speed, ForceMode2D.Impulse);
+
+        if (_rigidbody.velocity.magnitude > _maxSpeed)
+        {
+            _rigidbody.velocity = _rigidbody.velocity.normalized * _maxSpeed;
+        }
     }
 
     public void Movement()
@@ -66,6 +78,21 @@ public class PlayerScript : MonoBehaviour
 
         float x = Input.GetAxisRaw("Horizontal");
         float y = Input.GetAxisRaw("Vertical");
+
+        _rigidbody.velocity = Vector2.zero;
+        float dodgeForce = _dodgeForce / Mathf.Sqrt(x * x + y * y);
+        _rigidbody.AddForce (new Vector2(x, y) * dodgeForce, ForceMode2D.Impulse);
+
+        StartCoroutine(RefreshDodge());
+    }
+    
+    public void JoystickDodge()
+    {
+        _isDodging = true;
+        _canDodge = false;
+
+        float x = _moveJoystick.Horizontal;
+        float y = _moveJoystick.Vertical;
 
         _rigidbody.velocity = Vector2.zero;
         float dodgeForce = _dodgeForce / Mathf.Sqrt(x * x + y * y);

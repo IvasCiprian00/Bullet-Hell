@@ -48,6 +48,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _timer: {fileID: 2390999334801659981}
   _spike: {fileID: 7745861529288054353, guid: 48a9d4a53f6333e418c582047edfda8a, type: 3}
+  _tickSpeed: 3
+  _player: {fileID: 0}
+  _homing: 0
 --- !u!1 &2390999334801659981
 GameObject:
   m_ObjectHideFlags: 0

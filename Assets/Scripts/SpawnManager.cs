@@ -16,10 +16,6 @@ public class SpawnManager : MonoBehaviour
     };
 
     [SerializeField] private Waves[] _waves;
-    [SerializeField] private GameObject[] _enemies;
-    [SerializeField] private GameObject[] _bosses;
-    [SerializeField] private float _spawnInterval;
-    [SerializeField] private float _maxSpawnInterval;
     [SerializeField] private GameObject _player;
     [SerializeField] private GameObject _enemyIndicator;
 
@@ -77,7 +73,7 @@ public class SpawnManager : MonoBehaviour
             x = Random.Range(-20f, 20f);
             y = Random.Range(-20f, 20f);
 
-            if (Vector2.Distance(new Vector2(x, y), Vector2.zero) > 25 || Vector2.Distance(_player.transform.position, new Vector2(x, y)) <= 10)
+            if (Vector2.Distance(new Vector2(x, y), Vector2.zero) > 20 || Vector2.Distance(_player.transform.position, new Vector2(x, y)) <= 10)
             {
                 isValid = false;
             }
