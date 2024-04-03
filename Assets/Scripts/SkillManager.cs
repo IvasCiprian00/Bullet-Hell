@@ -30,6 +30,8 @@ public class SkillManager : MonoBehaviour
 
     private void Update()
     {
+        _cooldownTimer += Time.deltaTime;
+
         ShootController();
 
         if(_gameManager.GetScore() >= 50)
@@ -40,20 +42,22 @@ public class SkillManager : MonoBehaviour
 
     public void ShootController()
     {
-        _cooldownTimer += Time.deltaTime;
-
-        if (Input.GetButtonDown("Fire1") && _cooldownTimer >= _aimCooldown && !_isAiming && Camera.main.ScreenToWorldPoint(Input.mousePosition).x < _player.transform.position.x)
+        if (Input.GetButtonDown("Fire1") && _cooldownTimer >= _aimCooldown && !_isAiming)
         {
-            _initialPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            _aimsight.SetActive(true);
-            _isAiming = true;
-            _aimTimer = 0f;
-            Time.timeScale = 0.5f;
+            if (CheckMousePosition())
+            {
+                _initialPosition = Input.mousePosition;
+                Debug.Log(Input.mousePosition);
+                _aimsight.SetActive(true);
+                _isAiming = true;
+                _aimTimer = 0f;
+                Time.timeScale = 0.5f;
+            }
         }
 
         if (_isAiming)
         {
-            JoystickInput();
+            TouchInput();
 
             _aimTimer += Time.deltaTime;
             Time.fixedDeltaTime = this.fixedDeltaTime * Time.timeScale;
@@ -71,21 +75,44 @@ public class SkillManager : MonoBehaviour
         }
     }
 
+    public bool CheckMousePosition()
+    {
+        float x = Input.mousePosition.x;
+        float y = Input.mousePosition.y;
+
+        if(x <= 200 && y <= 200)
+        {
+            return false;
+        }
+
+        if(x >= 960)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
     public void MouseInput()
     {
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 mousePos = Input.mousePosition;
         mousePos.z = 0;
         Vector3 direction = (mousePos - _player.transform.position).normalized;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         _aimsight.transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 
-    public void JoystickInput()
+    public void TouchInput()
     {
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 mousePos = Input.mousePosition;
         mousePos.z = 0;
         Vector3 direction = (mousePos - _initialPosition).normalized;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         _aimsight.transform.rotation = Quaternion.Euler(0, 0, angle);
+    }
+
+    public void IsClicked()
+    {
+        Debug.Log("YEY");
     }
 }

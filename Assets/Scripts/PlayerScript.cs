@@ -47,6 +47,7 @@ public class PlayerScript : MonoBehaviour
             return;
         }
 
+        Movement();
         JoystickMovement();
     }
 
