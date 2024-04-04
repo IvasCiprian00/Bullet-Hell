@@ -154,10 +154,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 0}
   _gameManager: {fileID: 0}
+  _upgradeLevel: 0
   _bullet: {fileID: 5896299219720884618, guid: 241a6749644579f498a3c35a4749d700, type: 3}
   _aimsight: {fileID: 583837391}
-  _aimCooldown: 0
+  _aimCooldown: 5
   _aimDuration: 3
+  _canShoot: 1
 --- !u!4 &120894584
 Transform:
   m_ObjectHideFlags: 0
@@ -559,6 +561,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _waves:
   - enemies:
+    - {fileID: 5930827106666731999, guid: 0bef014419201a548895a6ae07f7b8a5, type: 3}
+    enemyCount: 01000000
+    timeGiven:
+    - 100
+  - enemies:
     - {fileID: 8399809645883171476, guid: f57a1c538ebb38941a975067a9726b27, type: 3}
     - {fileID: 8399809645883171476, guid: f57a1c538ebb38941a975067a9726b27, type: 3}
     - {fileID: 8399809645883171476, guid: f57a1c538ebb38941a975067a9726b27, type: 3}
@@ -589,9 +596,35 @@ MonoBehaviour:
     - 30
   - enemies:
     - {fileID: 8399809645883171476, guid: 87ef2750817d8714781a3cfee1cb87ef, type: 3}
-    enemyCount: 02000000
+    - {fileID: 8399809645883171476, guid: 87ef2750817d8714781a3cfee1cb87ef, type: 3}
+    - {fileID: 8399809645883171476, guid: f57a1c538ebb38941a975067a9726b27, type: 3}
+    enemyCount: 020000000200000002000000
     timeGiven:
     - 15
+    - 0
+    - 15
+  - enemies:
+    - {fileID: 8399809645883171476, guid: af5318d2c02c63b40b560e782bec756d, type: 3}
+    - {fileID: 8399809645883171476, guid: af5318d2c02c63b40b560e782bec756d, type: 3}
+    - {fileID: 8399809645883171476, guid: af5318d2c02c63b40b560e782bec756d, type: 3}
+    enemyCount: 010000000200000003000000
+    timeGiven:
+    - 5
+    - 9
+    - 14
+  - enemies:
+    - {fileID: 9052233739343608799, guid: ac947ee446ee805499309e71abfe961d, type: 3}
+    enemyCount: 01000000
+    timeGiven:
+    - 30
+  - enemies:
+    - {fileID: 8399809645883171476, guid: af5318d2c02c63b40b560e782bec756d, type: 3}
+    - {fileID: 8399809645883171476, guid: 88c1c1b49696a174291f51318977f02b, type: 3}
+    - {fileID: 8399809645883171476, guid: f57a1c538ebb38941a975067a9726b27, type: 3}
+    - {fileID: 8399809645883171476, guid: 87ef2750817d8714781a3cfee1cb87ef, type: 3}
+    enemyCount: 02000000020000000200000002000000
+    timeGiven:
+    - 30
   _player: {fileID: 0}
   _enemyIndicator: {fileID: 8631382795325639894, guid: e539e40dc65e31546bb9f45228868581, type: 3}
 --- !u!4 &468106382
@@ -2336,10 +2369,10 @@ RectTransform:
   - {fileID: 1816652736}
   m_Father: {fileID: 774378047}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -815, y: -406}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 100, y: 100.00003}
+  m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1787272190
 GameObject:
@@ -2618,8 +2651,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 25, y: 25}
+  m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1816652737
 MonoBehaviour:

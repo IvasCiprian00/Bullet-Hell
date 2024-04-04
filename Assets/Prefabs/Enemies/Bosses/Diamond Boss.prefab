@@ -70,8 +70,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1361656703
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
@@ -94,6 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2549520415558505384}
   - component: {fileID: 8393489875531550977}
+  - component: {fileID: 2160539613071212981}
   m_Layer: 0
   m_Name: Diamond Boss
   m_TagString: Untagged
@@ -130,6 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6962a87ca243ea447a9d78f84c8703a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _hp: 20
   _laser: {fileID: 5808066337216199568, guid: 4c2e6d5cfca4c954785b792478fd255c, type: 3}
   _laserContainer: {fileID: 6954774460434354552}
   _laserCooldown: 3
@@ -137,18 +139,68 @@ MonoBehaviour:
   _laserSpeed: 0
   _laserMaxSpeed: 2
   _laserIsActive: 0
-  _laserCanFire: 0
-  _wave: {fileID: 2536283234641102527, guid: 3b5e615482a25be43814cdea3d351b44, type: 3}
+  _laserCanFire: 1
+  _wave: {fileID: 612069165509780427, guid: 31cdc4f4346870d4c9a47e5cb59ea4a5, type: 3}
   _waveCooldown: 4
   _waveCount: 3
   _waveFireSpeed: 1
   _waveSpeed: 10
   _waveIsActive: 0
   _waveCanFire: 1
-  _spike: {fileID: 0}
-  _spikeCooldown: 0
-  _spikeCount: 0
-  _spikeCanFire: 0
+  _spike: {fileID: 406089602405542882, guid: 12e9bc5ab0d3c0649b3604b89ff1bf4b, type: 3}
+  _spikeCooldown: 10
+  _spikeCount: 6
+  _spikeCanFire: 1
+--- !u!60 &2160539613071212981
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5930827106666731999}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.015550852, y: 3.5814393}
+      - {x: -3.5791483, y: 0.013551056}
+      - {x: -1.7229965, y: -1.8509233}
+      - {x: -0.034248233, y: -3.5459645}
+      - {x: 3.5480466, y: -0.017550439}
+  m_UseDelaunayMesh: 0
 --- !u!1 &6954774460434354552
 GameObject:
   m_ObjectHideFlags: 0

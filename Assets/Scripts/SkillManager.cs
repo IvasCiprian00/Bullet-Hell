@@ -9,19 +9,22 @@ public class SkillManager : MonoBehaviour
     [SerializeField] GameObject _player;
     [SerializeField] GameManager _gameManager;
 
+    [SerializeField] private int _upgradeLevel;
     [SerializeField] private GameObject _bullet;
     [SerializeField] private GameObject _aimsight;
+    private int _bulletDamage;
     private bool _isAiming;
-    private float _cooldownTimer;
     [SerializeField] private float _aimCooldown;
     private float _aimTimer;
     [SerializeField] private float _aimDuration;
+    [SerializeField] private bool _canShoot;
     private float fixedDeltaTime;
 
 
     private Vector3 _initialPosition;
     private void Awake()
     {
+        _canShoot = true;
         _player = GameObject.Find("Player");
         _gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         this.fixedDeltaTime = Time.fixedDeltaTime;
@@ -30,24 +33,22 @@ public class SkillManager : MonoBehaviour
 
     private void Update()
     {
-        _cooldownTimer += Time.deltaTime;
-
+        _upgradeLevel = _gameManager.GetScore() / 50;
         ShootController();
-
-        if(_gameManager.GetScore() >= 50)
-        {
-            _aimCooldown = 8f;
-        }
     }
 
     public void ShootController()
     {
-        if (Input.GetButtonDown("Fire1") && _cooldownTimer >= _aimCooldown && !_isAiming)
+        if (!_canShoot)
+        {
+            return;
+        }
+
+        if (Input.GetButtonDown("Fire1") && !_isAiming)
         {
             if (CheckMousePosition())
             {
                 _initialPosition = Input.mousePosition;
-                Debug.Log(Input.mousePosition);
                 _aimsight.SetActive(true);
                 _isAiming = true;
                 _aimTimer = 0f;
@@ -64,15 +65,75 @@ public class SkillManager : MonoBehaviour
 
             if (Input.GetButtonUp("Fire1") || _aimTimer >= _aimDuration)
             {
-                GameObject reference = Instantiate(_bullet, _player.transform.position, Quaternion.identity);
-                reference.transform.rotation = _aimsight.transform.rotation;
-                reference.transform.Rotate(0, 0, -90);
-                _isAiming = false;
-                _aimsight.SetActive(false);
-                _cooldownTimer = 0f;
-                Time.timeScale = 1.0f;
+                FireProjectile();
+
+                StartCoroutine(StartAimCooldown());
             }
         }
+    }
+
+    public void FireProjectile()
+    {
+        switch (_upgradeLevel)
+        {
+            case 1:
+                InstantiateProjectiles(1, 1);
+
+                _aimCooldown = 3f;
+                break;
+            case 2:
+                InstantiateProjectiles(1, 2);
+
+                _aimCooldown = 3f;
+                break;
+            case 3:
+                InstantiateProjectiles(2, 2);
+
+                _aimCooldown = 3f;
+                break;
+            default:
+                InstantiateProjectiles(1, 1);
+
+                _aimCooldown = 5f;
+                break;
+        }
+
+        _isAiming = false;
+        _aimsight.SetActive(false);
+        Time.timeScale = 1.0f;
+    }
+
+    public void InstantiateProjectiles(int projectileCount, int projectileDamage)
+    {
+        GameObject reference;
+        reference = InstantiateSingleProjectile(0);
+        reference.GetComponent<BulletScript>().SetDamage(projectileDamage);
+
+        for (int i = 1; i < projectileCount; i++) 
+        {
+            float deviation = Random.Range(-15f, 15f);
+
+            reference = InstantiateSingleProjectile(deviation);
+            reference.GetComponent<BulletScript>().SetDamage(projectileDamage / 2);
+        }
+    }
+
+    public GameObject InstantiateSingleProjectile(float deviation)
+    {
+        GameObject reference = Instantiate(_bullet, _player.transform.position, Quaternion.identity);
+        reference.transform.rotation = _aimsight.transform.rotation;
+        reference.transform.Rotate(0, 0, -90 + deviation);
+
+        return reference;
+    }
+
+    IEnumerator StartAimCooldown()
+    {
+        _canShoot = false;
+
+        yield return new WaitForSeconds(_aimCooldown);
+
+        _canShoot = true;
     }
 
     public bool CheckMousePosition()

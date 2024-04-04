@@ -21,7 +21,7 @@ public class EnemyIndicatorScript : MonoBehaviour
             return;
         }
 
-        if (Vector2.Distance(_player.transform.position, _enemy.transform.position) >= 8f)
+        if (Vector2.Distance(_player.transform.position, _enemy.transform.position) >= 12f)
         {
             gameObject.GetComponent<SpriteRenderer>().enabled = true;
         }

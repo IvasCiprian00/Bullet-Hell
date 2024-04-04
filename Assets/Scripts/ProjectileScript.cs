@@ -14,7 +14,6 @@ public class ProjectileScript : MonoBehaviour
     [SerializeField] private float _rotationSpeed;
 
     [SerializeField] private bool _isHoming;
-    private bool _friendlyFire;
     private bool _stopFollowing;
 
     private void Awake()
@@ -25,10 +24,6 @@ public class ProjectileScript : MonoBehaviour
 
     private IEnumerator Start()
     {
-        yield return new WaitForSeconds(0.5f);
-
-        _friendlyFire = true;
-
         yield return new WaitForSeconds(15f);
 
         _gameManager.AddScore(0);
@@ -79,7 +74,7 @@ public class ProjectileScript : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        if((collision.tag == "Enemy") && _friendlyFire)
+        if((collision.tag == "Enemy") && _isHoming)
         {
             _gameManager.AddScore(0);
             Destroy(gameObject);
