@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
-    [SerializeField] private int _damage; 
+    [SerializeField] private float _damage; 
 
     private void Update()
     {
@@ -30,7 +30,7 @@ public class BulletScript : MonoBehaviour
         }
     }
 
-    public void SetDamage(int damage)
+    public void SetDamage(float damage)
     {
         _damage = damage;
     }

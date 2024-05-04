@@ -154,10 +154,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 0}
   _gameManager: {fileID: 0}
+  _upgradeInfo:
+  - damage: 1
+    cooldown: 0
+    projCount: 1
+  - damage: 1
+    cooldown: 3
+    projCount: 1
+  - damage: 2
+    cooldown: 3
+    projCount: 1
+  - damage: 2
+    cooldown: 3
+    projCount: 2
   _upgradeLevel: 0
   _bullet: {fileID: 5896299219720884618, guid: 241a6749644579f498a3c35a4749d700, type: 3}
   _aimsight: {fileID: 583837391}
-  _aimCooldown: 5
   _aimDuration: 3
   _canShoot: 1
 --- !u!4 &120894584
@@ -561,11 +573,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _waves:
   - enemies:
-    - {fileID: 5930827106666731999, guid: 0bef014419201a548895a6ae07f7b8a5, type: 3}
-    enemyCount: 01000000
-    timeGiven:
-    - 100
-  - enemies:
     - {fileID: 8399809645883171476, guid: f57a1c538ebb38941a975067a9726b27, type: 3}
     - {fileID: 8399809645883171476, guid: f57a1c538ebb38941a975067a9726b27, type: 3}
     - {fileID: 8399809645883171476, guid: f57a1c538ebb38941a975067a9726b27, type: 3}
@@ -593,7 +600,7 @@ MonoBehaviour:
     - {fileID: 8049170102531299753, guid: cda77f0c01f91e546ab06825933bca19, type: 3}
     enemyCount: 01000000
     timeGiven:
-    - 30
+    - 40
   - enemies:
     - {fileID: 8399809645883171476, guid: 87ef2750817d8714781a3cfee1cb87ef, type: 3}
     - {fileID: 8399809645883171476, guid: 87ef2750817d8714781a3cfee1cb87ef, type: 3}
@@ -625,6 +632,11 @@ MonoBehaviour:
     enemyCount: 02000000020000000200000002000000
     timeGiven:
     - 30
+  - enemies:
+    - {fileID: 5930827106666731999, guid: 0bef014419201a548895a6ae07f7b8a5, type: 3}
+    enemyCount: 01000000
+    timeGiven:
+    - 100
   _player: {fileID: 0}
   _enemyIndicator: {fileID: 8631382795325639894, guid: e539e40dc65e31546bb9f45228868581, type: 3}
 --- !u!4 &468106382
@@ -1102,6 +1114,10 @@ PrefabInstance:
     - target: {fileID: 2929252283123773939, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
       propertyPath: m_Name
       value: Movement Joystick
+      objectReference: {fileID: 0}
+    - target: {fileID: 2929252283123773939, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2353,7 +2369,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1619226962
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2371,7 +2387,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 100, y: 100.00003}
+  m_AnchoredPosition: {x: 100, y: 100}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1787272190

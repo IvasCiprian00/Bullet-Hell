@@ -1,20 +1,28 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Random = UnityEngine.Random;
 
 public class SkillManager : MonoBehaviour
 {
+    [Serializable] public struct UpgradeInfo
+    {
+        public float damage;
+        public float cooldown;
+        public int projCount;
+    };
+
     [SerializeField] GameObject _player;
     [SerializeField] GameManager _gameManager;
 
+    [SerializeField] private UpgradeInfo[] _upgradeInfo;
     [SerializeField] private int _upgradeLevel;
     [SerializeField] private GameObject _bullet;
     [SerializeField] private GameObject _aimsight;
-    private int _bulletDamage;
     private bool _isAiming;
-    [SerializeField] private float _aimCooldown;
     private float _aimTimer;
     [SerializeField] private float _aimDuration;
     [SerializeField] private bool _canShoot;
@@ -58,7 +66,8 @@ public class SkillManager : MonoBehaviour
 
         if (_isAiming)
         {
-            TouchInput();
+            //TouchInput();
+            MouseInput();
 
             _aimTimer += Time.deltaTime;
             Time.fixedDeltaTime = this.fixedDeltaTime * Time.timeScale;
@@ -74,47 +83,25 @@ public class SkillManager : MonoBehaviour
 
     public void FireProjectile()
     {
-        switch (_upgradeLevel)
-        {
-            case 1:
-                InstantiateProjectiles(1, 1);
-
-                _aimCooldown = 3f;
-                break;
-            case 2:
-                InstantiateProjectiles(1, 2);
-
-                _aimCooldown = 3f;
-                break;
-            case 3:
-                InstantiateProjectiles(2, 2);
-
-                _aimCooldown = 3f;
-                break;
-            default:
-                InstantiateProjectiles(1, 1);
-
-                _aimCooldown = 5f;
-                break;
-        }
+        InstantiateProjectiles();
 
         _isAiming = false;
         _aimsight.SetActive(false);
         Time.timeScale = 1.0f;
     }
 
-    public void InstantiateProjectiles(int projectileCount, int projectileDamage)
+    public void InstantiateProjectiles()
     {
         GameObject reference;
         reference = InstantiateSingleProjectile(0);
-        reference.GetComponent<BulletScript>().SetDamage(projectileDamage);
+        reference.GetComponent<BulletScript>().SetDamage(_upgradeInfo[_upgradeLevel].damage);
 
-        for (int i = 1; i < projectileCount; i++) 
+        for (int i = 1; i < _upgradeInfo[_upgradeLevel].projCount; i++) 
         {
             float deviation = Random.Range(-15f, 15f);
 
             reference = InstantiateSingleProjectile(deviation);
-            reference.GetComponent<BulletScript>().SetDamage(projectileDamage / 2);
+            reference.GetComponent<BulletScript>().SetDamage(_upgradeInfo[_upgradeLevel].damage / 2);
         }
     }
 
@@ -131,14 +118,15 @@ public class SkillManager : MonoBehaviour
     {
         _canShoot = false;
 
-        yield return new WaitForSeconds(_aimCooldown);
+        yield return new WaitForSeconds(_upgradeInfo[_upgradeLevel].cooldown);
 
         _canShoot = true;
     }
 
     public bool CheckMousePosition()
     {
-        float x = Input.mousePosition.x;
+        return true;
+        /*float x = Input.mousePosition.x;
         float y = Input.mousePosition.y;
 
         if(x <= 200 && y <= 200)
@@ -146,21 +134,23 @@ public class SkillManager : MonoBehaviour
             return false;
         }
 
-        if(x >= 960)
+        if(x <= 960)
         {
             return false;
         }
 
-        return true;
+        return true;*/
     }
 
     public void MouseInput()
     {
         Vector3 mousePos = Input.mousePosition;
+        mousePos = Camera.main.ScreenToWorldPoint(mousePos);
         mousePos.z = 0;
         Vector3 direction = (mousePos - _player.transform.position).normalized;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        _aimsight.transform.rotation = Quaternion.Euler(0, 0, angle);
+        _aimsight.transform.right = mousePos - _player.transform.position ;
+        //_aimsight.transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 
     public void TouchInput()

@@ -26,7 +26,7 @@ public class PlayerScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && _canDodge)
         {
-            JoystickDodge();
+            Dodge();
         }
 
         if (_isDodging)

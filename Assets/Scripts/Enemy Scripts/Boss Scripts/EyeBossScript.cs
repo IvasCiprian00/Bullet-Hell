@@ -23,6 +23,11 @@ public class EyeBossScript : MonoBehaviour
 
     void Update()
     {
+        if(_player == null)
+        {
+            return;
+        }
+
         float distance = Vector2.Distance(transform.position, _player.transform.position);
         float step = (distance - 7) * Time.deltaTime;
         transform.position = Vector2.MoveTowards(transform.position, _player.transform.position, step);

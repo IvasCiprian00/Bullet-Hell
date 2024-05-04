@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyScript : MonoBehaviour
 {
     [SerializeField] private GameObject _player;
+    [SerializeField] private float _moveSpeed;
     [SerializeField] private GameObject _projectile;
     [SerializeField] private float _fireRate;
     [SerializeField] private GameObject _projSpawnLocation;
@@ -31,9 +32,14 @@ public class EnemyScript : MonoBehaviour
 
         Movement();
 
+        ShootingController();
+    }
+
+    public void ShootingController()
+    {
         _timer += Time.deltaTime;
 
-        if(_timer >= _fireRate)
+        if (_timer >= _fireRate)
         {
             if (_isPredicting)
             {
@@ -71,6 +77,7 @@ public class EnemyScript : MonoBehaviour
     {
         transform.right = _player.transform.position - transform.position;
 
+        transform.Translate(Vector3.down * _moveSpeed * Time.deltaTime);
         /*float distance = Vector3.Distance(transform.position, _player.transform.position);
         //if (Mathf.Abs(Mathf.Abs(transform.position.x) - Mathf.Abs(_player.transform.position.x)) >= 9f || Mathf.Abs(Mathf.Abs(transform.position.y) - Mathf.Abs(_player.transform.position.y)) >= 5f)
         float x = transform.position.x;
