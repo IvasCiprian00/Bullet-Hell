@@ -41,7 +41,22 @@ public class SkillManager : MonoBehaviour
 
     private void Update()
     {
-        _upgradeLevel = _gameManager.GetScore() / 50;
+        _upgradeLevel = _gameManager.GetScore() / 30;
+        if(_upgradeLevel > 3)
+        {
+            _upgradeLevel = 3;
+        }
+
+        if (_gameManager.IsGamePaused())
+        {
+            return;
+        }
+
+        if(_player == null) 
+        {
+            return;
+        }
+
         ShootController();
     }
 

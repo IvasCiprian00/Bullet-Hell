@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyScript : MonoBehaviour
 {
+    [SerializeField] private GameObject _sprite;
     [SerializeField] private GameObject _player;
     [SerializeField] private float _moveSpeed;
     [SerializeField] private GameObject _projectile;
@@ -13,11 +15,14 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] private float _projectileRotationSpeed;
     [SerializeField] private float _accuracy;
     [SerializeField] private bool _isPredicting;
+    [SerializeField] private Slider _fireWarning;
     private float _timer;
 
     private void Start()
     {
         _player = GameObject.Find("Player");
+        _fireWarning = GetComponentInChildren<Slider>();
+        _fireWarning.maxValue = _fireRate;
 
         _projectile.GetComponent<ProjectileScript>().SetSpeed(_projectileSpeed);
         _projectile.GetComponent<ProjectileScript>().SetRotationSpeed(_projectileRotationSpeed);
@@ -29,6 +34,8 @@ public class EnemyScript : MonoBehaviour
         {
             return;
         }
+
+        _fireWarning.value = _timer;
 
         Movement();
 
@@ -75,9 +82,9 @@ public class EnemyScript : MonoBehaviour
 
     public void Movement()
     {
-        transform.right = _player.transform.position - transform.position;
+        _sprite.transform.right = _player.transform.position - transform.position;
 
-        transform.Translate(Vector3.down * _moveSpeed * Time.deltaTime);
+        //transform.Translate(Vector3.down * _moveSpeed * Time.deltaTime);
         /*float distance = Vector3.Distance(transform.position, _player.transform.position);
         //if (Mathf.Abs(Mathf.Abs(transform.position.x) - Mathf.Abs(_player.transform.position.x)) >= 9f || Mathf.Abs(Mathf.Abs(transform.position.y) - Mathf.Abs(_player.transform.position.y)) >= 5f)
         float x = transform.position.x;

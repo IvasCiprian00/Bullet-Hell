@@ -38,6 +38,10 @@ public class RobotBossScript : MonoBehaviour
 
     public void Update()
     {
+        if (_player == null)
+        {
+            return;
+        }
         Movement();
         RightArmController();
         LeftArmController();
@@ -82,6 +86,7 @@ public class RobotBossScript : MonoBehaviour
 
     public IEnumerator FireProjectiles()
     {
+        _lTimer = 0;
         _lIsFiring = true;
 
         while(_lIsFiring)

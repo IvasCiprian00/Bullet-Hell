@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private GameManager _gameManager;
     [SerializeField] private TextMeshProUGUI _score;
     [SerializeField] private GameObject _dodgeRefreshed;
+    [SerializeField] private GameObject _restartButton;
+    [SerializeField] private GameObject _quitButton;
+    [SerializeField] private GameObject _pauseScreen;
     private GameObject _player;
 
     private void Awake()
@@ -28,10 +32,15 @@ public class UIManager : MonoBehaviour
 
     public IEnumerator DestroyDodgeRefreshed()
     {
-        GameObject reference = Instantiate(_dodgeRefreshed, new Vector3(0, 1, 0), Quaternion.identity, gameObject.transform);
+        GameObject reference = Instantiate(_dodgeRefreshed, _player.transform.position, Quaternion.identity, gameObject.transform);
 
         yield return new WaitForSeconds(3f);
 
         Destroy(reference);
+    }
+
+    public void DisplayPauseScreen(bool cond)
+    {
+        _pauseScreen.SetActive(cond);
     }
 }
