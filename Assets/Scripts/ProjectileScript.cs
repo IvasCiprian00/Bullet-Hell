@@ -5,6 +5,7 @@ using static UnityEngine.GraphicsBuffer;
 
 public class ProjectileScript : MonoBehaviour
 {
+    private UIManager _uiManager;
     [SerializeField] private GameManager _gameManager;
     [SerializeField] private GameObject _player;
     [SerializeField] private GameObject _rotationDirection;
@@ -20,6 +21,7 @@ public class ProjectileScript : MonoBehaviour
     {
         _gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         _player = GameObject.Find("Player");
+        _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
     }
 
     private IEnumerator Start()
@@ -76,7 +78,8 @@ public class ProjectileScript : MonoBehaviour
         }
         if((collision.tag == "Enemy") && _isHoming)
         {
-            _gameManager.AddScore(0);
+            _gameManager.AddScore(2);
+            _uiManager.AddScore(2, collision.transform.position);
             Destroy(gameObject);
             Destroy(collision.gameObject);
         }

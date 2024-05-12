@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class SkillManager : MonoBehaviour
@@ -15,8 +15,9 @@ public class SkillManager : MonoBehaviour
         public int projCount;
     };
 
-    [SerializeField] GameObject _player;
-    [SerializeField] GameManager _gameManager;
+    [SerializeField] private GameObject _player;
+    [SerializeField] private Slider _shootCooldownSlider;
+    [SerializeField] private GameManager _gameManager;
 
     [SerializeField] private UpgradeInfo[] _upgradeInfo;
     [SerializeField] private int _upgradeLevel;
@@ -38,21 +39,21 @@ public class SkillManager : MonoBehaviour
         this.fixedDeltaTime = Time.fixedDeltaTime;
     }
 
-
     private void Update()
     {
         _upgradeLevel = _gameManager.GetScore() / 30;
-        if(_upgradeLevel > 3)
+        if (_upgradeLevel >= 3)
         {
             _upgradeLevel = 3;
         }
+        _shootCooldownSlider.maxValue = _upgradeInfo[_upgradeLevel].cooldown;
 
         if (_gameManager.IsGamePaused())
         {
             return;
         }
 
-        if(_player == null) 
+        if(_player == null)
         {
             return;
         }
@@ -64,11 +65,19 @@ public class SkillManager : MonoBehaviour
     {
         if (!_canShoot)
         {
+            _shootCooldownSlider.value += Time.deltaTime;
+
+            if(_shootCooldownSlider.value >= _shootCooldownSlider.maxValue)
+            {
+                _shootCooldownSlider.gameObject.SetActive(false);
+            }
+
             return;
         }
 
         if (Input.GetButtonDown("Fire1") && !_isAiming)
         {
+            _shootCooldownSlider.gameObject.SetActive(false);
             if (CheckMousePosition())
             {
                 _initialPosition = Input.mousePosition;
@@ -90,6 +99,9 @@ public class SkillManager : MonoBehaviour
             if (Input.GetButtonUp("Fire1") || _aimTimer >= _aimDuration)
             {
                 FireProjectile();
+                _shootCooldownSlider.gameObject.SetActive(true);
+
+                _shootCooldownSlider.value = 0;
 
                 StartCoroutine(StartAimCooldown());
             }

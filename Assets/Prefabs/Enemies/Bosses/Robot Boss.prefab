@@ -997,7 +997,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 0}
-  _hp: 10
+  _hp: 15
   _rightArm: {fileID: 7202778206107077811}
   _aimSight: {fileID: 145451799627869955}
   _laser: {fileID: 5808066337216199568, guid: 4c2e6d5cfca4c954785b792478fd255c, type: 3}
@@ -1009,9 +1009,9 @@ MonoBehaviour:
   _leftArm: {fileID: 3526988109378376236}
   _projectile: {fileID: 8399809645883171476, guid: 91d6cafa2377f774c9136c22efe7ebff, type: 3}
   _lTimer: 0
-  _lCooldown: 1
-  _lFireSpeed: 0.1
-  _lAimDuration: 1
+  _lCooldown: 3
+  _lFireSpeed: 0.3
+  _lAimDuration: 0
   _alternatingAngle: 45
   _lIsFiring: 0
   _animator: {fileID: 0}

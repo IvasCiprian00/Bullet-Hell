@@ -10,6 +10,7 @@ public class SpawnManager : MonoBehaviour
 {
     [Serializable] public struct Waves
     {
+        public string name;
         public GameObject[] enemies;
         public int[] enemyCount;
         public float[] timeGiven;

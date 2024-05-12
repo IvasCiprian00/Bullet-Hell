@@ -30,10 +30,12 @@ public class RobotBossScript : MonoBehaviour
     [SerializeField] private Animator _animator;
 
     public float offset;
+    private int _initialHp;
 
     public void Awake()
     {
         _player = GameObject.Find("Player");
+        _initialHp = _hp;
     }
 
     public void Update()
@@ -65,11 +67,11 @@ public class RobotBossScript : MonoBehaviour
 
         if (_lIsFiring)
         {
-            _leftArm.transform.Rotate(0, 0, _alternatingAngle * 5f * Time.deltaTime);
+            _leftArm.transform.Rotate(0, 0, _alternatingAngle * 3f * Time.deltaTime);
             _lAimDuration += Time.deltaTime;
         }
 
-        if(_lAimDuration >= 2f)
+        if(_lAimDuration >= 3f)
         {
             _lAimDuration = 0;
             _lIsFiring = false;
@@ -148,14 +150,34 @@ public class RobotBossScript : MonoBehaviour
     {
         _hp -= dmg;
 
+        CheckHpThreshold();
+
         if(_hp <= 0)
         {
             Destroy(gameObject);
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void CheckHpThreshold()
     {
-        Debug.Log("YEY");
+        if(_hp <= 3 * _initialHp / 10)
+        {
+            _aimTimer = 1;
+            _rCooldown = 2;
+
+            _lCooldown = 1;
+            _lFireSpeed = 0.1f;
+            return;
+        }
+
+        if(_hp <= 7 * _initialHp / 10)
+        {
+            _aimTimer = 1.5f;
+            _rCooldown = 3;
+
+            _lCooldown = 2;
+            _lFireSpeed = 0.2f;
+            return;
+        }
     }
 }

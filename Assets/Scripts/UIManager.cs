@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -42,5 +43,24 @@ public class UIManager : MonoBehaviour
     public void DisplayPauseScreen(bool cond)
     {
         _pauseScreen.SetActive(cond);
+    }
+
+    public void AddScore(int score, Vector2 enemyPosition)
+    {
+        StartCoroutine(DisplayAddScoreText(score, enemyPosition));
+    }
+
+    public IEnumerator DisplayAddScoreText(int score, Vector2 enemyPosition)
+    {
+        GameObject reference = Instantiate(_dodgeRefreshed, enemyPosition, Quaternion.identity, gameObject.transform);
+        TextMeshProUGUI addText = reference.GetComponentInChildren<TextMeshProUGUI>();
+        addText.text = "+ " + score.ToString();
+        addText.fontSize = 50;
+        addText.color = Color.black;
+        addText.fontStyle = FontStyles.Bold;
+
+        yield return new WaitForSeconds(3f);
+
+        Destroy(reference);
     }
 }
