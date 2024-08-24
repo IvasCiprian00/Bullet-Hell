@@ -23,4 +23,8 @@ public class MainMenuManager : MonoBehaviour
         _gameManager.SetGameIsStarted(true);
     }
 
+    public void ClickButton(GameObject overlay)
+    {
+        overlay.SetActive(!overlay.activeSelf);
+    }
 }
