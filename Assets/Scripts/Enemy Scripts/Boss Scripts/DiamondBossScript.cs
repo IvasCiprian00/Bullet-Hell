@@ -158,7 +158,7 @@ public class DiamondBossScript : MonoBehaviour
         {
             if(_player == null)
             {
-                StopAllCoroutines();
+                continue;
             }
             GameObject reference = Instantiate(_wave, transform.position, Quaternion.identity);
             reference.transform.right = _player.transform.position - transform.position;

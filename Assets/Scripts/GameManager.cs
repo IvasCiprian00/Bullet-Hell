@@ -9,13 +9,28 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _player;
     [SerializeField] private float _score;
     [SerializeField] private int _nrOfAliveEnemies;
-    [SerializeField] private float _aliveEnemiesMultiplier;
+    [SerializeField] private int _firstWaveIndex;
+
+    [SerializeField] private GameObject _mainMenuScreen;
+    [SerializeField] private GameObject _selectWaveScreen;
 
     private bool _gameIsPaused;
+    [SerializeField] private bool _gameIsStarted;
+
+    private static GameManager managerInstance;
 
     private void Awake()
     {
-        _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+        DontDestroyOnLoad(this);
+
+        if (managerInstance == null)
+        {
+            managerInstance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void Start()
@@ -25,6 +40,11 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (!_gameIsStarted)
+        {
+            return;
+        }
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             _gameIsPaused = !_gameIsPaused;
@@ -33,6 +53,7 @@ public class GameManager : MonoBehaviour
             _uiManager.DisplayPauseScreen(_gameIsPaused);
 
         }
+
         if(_player == null)
         {
             return;
@@ -43,14 +64,7 @@ public class GameManager : MonoBehaviour
             _player.GetComponent<PlayerScript>().TakeDamage();
         }
 
-        GetScoreMultiplier();
         _score += Time.deltaTime * 0.5f;
-    }
-
-    public void GetScoreMultiplier()
-    {
-        _nrOfAliveEnemies = GameObject.FindGameObjectsWithTag("Enemy").Length;
-        _aliveEnemiesMultiplier = _nrOfAliveEnemies * 1.3f;
     }
 
     public void AddScore(int points)
@@ -58,17 +72,24 @@ public class GameManager : MonoBehaviour
         _score += points;
     }
 
+    public void GoToMainMenu()
+    {
+        Time.timeScale = 1.0f;
+        SceneManager.LoadScene(0);
+        _gameIsStarted = false;
+    }
+
+
     public void ExitGame()
     {
         Application.Quit();
     }
 
-    public void Restart()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
 
     public int GetScore() { return (int) _score; }
-
+    public void SetPlayer() { _player = GameObject.Find("Player"); }
     public bool IsGamePaused() {  return _gameIsPaused; }
+    public void SetUIManager(UIManager uiManager) { _uiManager = uiManager;  }
+    public void SetGameIsStarted(bool cond) {  _gameIsStarted = cond; }
+    public int GetFirstWaveIndex() { return _firstWaveIndex; }
 }

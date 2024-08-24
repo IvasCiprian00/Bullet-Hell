@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -17,10 +18,14 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
-        _gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         _player = GameObject.Find("Player");
     }
 
+    public void Start()
+    {
+        _gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        _gameManager.SetUIManager(this);
+    }
     private void Update()
     {
         _score.text = "Score: " + _gameManager.GetScore();
@@ -62,5 +67,24 @@ public class UIManager : MonoBehaviour
         yield return new WaitForSeconds(3f);
 
         Destroy(reference);
+    }
+
+
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
+
+    public void GoToMainMenu()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(0);
+        _gameManager.SetGameIsStarted(false);
+    }
+
+    public void StartGame()
+    {
+        SceneManager.LoadScene(1);
+        _gameManager.SetGameIsStarted(true);
     }
 }

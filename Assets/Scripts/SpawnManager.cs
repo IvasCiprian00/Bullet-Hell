@@ -27,13 +27,13 @@ public class SpawnManager : MonoBehaviour
     private void Awake()
     {
         _player = GameObject.Find("Player");
-
-        StartCoroutine(SpawnWaves());
+        int firstWave = GameObject.Find("Game Manager").GetComponent<GameManager>().GetFirstWaveIndex();
+        StartCoroutine(SpawnWaves(firstWave));
     }
 
-    public IEnumerator SpawnWaves()
+    public IEnumerator SpawnWaves(int firstWave)
     {
-        for (int i = 0; i < _waves.Length; i++)
+        for (int i = firstWave; i < _waves.Length; i++)
         {
             for(int j = 0; j < _waves[i].enemies.Length; j++)
             {

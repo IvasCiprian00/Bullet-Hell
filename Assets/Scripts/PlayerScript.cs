@@ -20,6 +20,7 @@ public class PlayerScript : MonoBehaviour
     {
         _canDodge = true;
         _rigidbody = GetComponent<Rigidbody2D>();
+        GameObject.Find("Game Manager").GetComponent<GameManager>().SetPlayer();
     }
 
     private void Update()

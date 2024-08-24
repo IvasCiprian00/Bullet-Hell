@@ -12,6 +12,7 @@ TagManager:
   - Spike
   - Boss
   - Bullet
+  - Projectile
   layers:
   - Default
   - TransparentFX

@@ -180,7 +180,7 @@ MonoBehaviour:
   _waveCooldown: 4
   _waveCount: 4
   _waveFireSpeed: 1
-  _waveSpeed: 10
+  _waveSpeed: 11
   _waveIsActive: 0
   _waveCanFire: 1
   _spike: {fileID: 406089602405542882, guid: 12e9bc5ab0d3c0649b3604b89ff1bf4b, type: 3}

@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 5051171724376583352}
   m_Layer: 0
   m_Name: Non-Homing Projectile
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -199,3 +199,4 @@ MonoBehaviour:
   _rigidbody: {fileID: 5311608601841192980}
   _speed: 8
   _rotationSpeed: 3
+  _isHoming: 0

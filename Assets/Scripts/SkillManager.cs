@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,6 +20,7 @@ public class SkillManager : MonoBehaviour
     [SerializeField] private Slider _shootCooldownSlider;
     [SerializeField] private GameManager _gameManager;
 
+    [Header("Shooting Section")]
     [SerializeField] private UpgradeInfo[] _upgradeInfo;
     [SerializeField] private int _upgradeLevel;
     [SerializeField] private GameObject _bullet;
@@ -60,6 +62,7 @@ public class SkillManager : MonoBehaviour
 
         ShootController();
     }
+
 
     public void ShootController()
     {
