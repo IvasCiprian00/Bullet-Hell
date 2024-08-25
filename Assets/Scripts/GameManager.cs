@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _mainMenuScreen;
     [SerializeField] private GameObject _selectWaveScreen;
 
-    private bool _gameIsPaused;
+    [SerializeField] private bool _gameIsPaused;
     [SerializeField] private bool _gameIsStarted;
 
     private static GameManager managerInstance;
@@ -90,6 +90,6 @@ public class GameManager : MonoBehaviour
     public void SetPlayer() { _player = GameObject.Find("Player"); }
     public bool IsGamePaused() {  return _gameIsPaused; }
     public void SetUIManager(UIManager uiManager) { _uiManager = uiManager;  }
-    public void SetGameIsStarted(bool cond) {  _gameIsStarted = cond; }
+    public void SetGameIsStarted(bool cond) {  _gameIsStarted = cond; _gameIsPaused = false; }
     public int GetFirstWaveIndex() { return _firstWaveIndex; }
 }
