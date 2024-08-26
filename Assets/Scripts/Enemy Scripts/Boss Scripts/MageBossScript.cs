@@ -1,10 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class MageBossScript : MonoBehaviour
 {
+    [Header("Wall Ability")]
+    [SerializeField] private int _wallCooldown;
+    [SerializeField] private GameObject _wall;
+    private GameObject _wallReference;
+    [SerializeField] private int _wallDuration;
+    [SerializeField] private bool _canCastWall;
+
+    [Header("Misc")]
     [SerializeField] private GameObject _player;
     [SerializeField] private int _hp;
     [SerializeField] private int _initialHp;
@@ -17,12 +24,39 @@ public class MageBossScript : MonoBehaviour
 
     public void Update()
     {
+
         if (_player == null)
         {
             return;
         }
-        Movement();
 
+        if (_canCastWall)
+        {
+            _wallReference = Instantiate(_wall, _player.transform.position, Quaternion.identity);
+            StartCoroutine(StartWallAttack());
+        }
+
+        Movement();
+    }
+
+    public IEnumerator StartWallAttack()
+    {
+        _canCastWall = false;
+        
+        yield return new WaitForSeconds(_wallDuration);
+
+        Destroy(_wallReference);
+
+        yield return new WaitForSeconds(_wallCooldown);
+
+        _canCastWall = true;
+    }
+
+    public IEnumerator StartWallCooldown()
+    {
+        yield return new WaitForSeconds(_wallCooldown);
+
+        _canCastWall = true;
     }
 
     public void Movement()
