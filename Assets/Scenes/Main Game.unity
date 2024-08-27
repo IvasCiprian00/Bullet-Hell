@@ -676,7 +676,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &468106381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2872,10 +2872,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e66ecba90f549b438b056bf5c6b4f6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _wallCooldown: 10
+  _canAttack: 1
+  _attackCooldown: 5
   _wall: {fileID: 5780160194038940041, guid: 40ea2bbe54d9c5644a5e046a718c2078, type: 3}
-  _wallDuration: 5
-  _canCastWall: 1
+  _wallOpening: {fileID: 612069165509780427, guid: 5cf778706a15aea47825f30934538c4f, type: 3}
+  _wallCount: 15
+  _wallSpeed: 7
+  _wallInterval: 0.75
+  _wave: {fileID: 612069165509780427, guid: e8643c15623a2004a9f6d1fd809892d6, type: 3}
+  _waveCount: 5
+  _waveInterval: 1
+  _waveSpeed: 7
+  _transformSetting:
+  - positionChange: {x: 10, y: 0, z: 0}
+    rotationChange: {x: 0, y: 0, z: 180}
+  - positionChange: {x: 0, y: 10, z: 0}
+    rotationChange: {x: 0, y: 0, z: -90}
+  - positionChange: {x: -10, y: 0, z: 0}
+    rotationChange: {x: 0, y: 0, z: 0}
+  - positionChange: {x: 0, y: -10, z: 0}
+    rotationChange: {x: 0, y: 0, z: 90}
   _player: {fileID: 0}
   _hp: 0
   _initialHp: 100

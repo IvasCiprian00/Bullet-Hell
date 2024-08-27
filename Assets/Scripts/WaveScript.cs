@@ -5,13 +5,13 @@ using UnityEngine;
 public class WaveScript : MonoBehaviour
 {
     private UIManager _uiManager;
-    private Rigidbody2D _rigidbody;
+    private BoxCollider2D _boxCollider;
     private float _speed;
 
     private void Start()
     {
         _uiManager =  GameObject.Find("Canvas").GetComponent<UIManager>();
-        _rigidbody = GetComponent<Rigidbody2D>();
+        _boxCollider = GetComponent<BoxCollider2D>();
     }
 
     void Update()
@@ -27,6 +27,8 @@ public class WaveScript : MonoBehaviour
             {
                 return;
             }
+
+            _boxCollider.enabled = false;
 
             collision.GetComponent<PlayerScript>().RefreshDodgeCooldown();
 
