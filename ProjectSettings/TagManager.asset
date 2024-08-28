@@ -13,6 +13,7 @@ TagManager:
   - Boss
   - Bullet
   - Projectile
+  - Destroy Projectile
   layers:
   - Default
   - TransparentFX

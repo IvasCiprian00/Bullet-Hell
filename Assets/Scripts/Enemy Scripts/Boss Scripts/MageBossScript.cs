@@ -19,6 +19,15 @@ public class MageBossScript : MonoBehaviour
     [SerializeField] private GameObject _wall;
     private GameObject _wallReference;
 
+    [Header("Projectile Attack")]
+    [SerializeField] private GameObject _projectile;
+    [SerializeField] private GameObject _projectileContainer;
+    [SerializeField] private float _projectileContainerSpeed;
+    [SerializeField] private float _projectileSpeed;
+    [SerializeField] private float _projectileWaveCount;
+    [SerializeField] private float _projectileInterval;
+    [SerializeField] private GameObject[] _projectileSpawnLocations;
+
     [Header("Wall Opening Attack")]
     [SerializeField] private GameObject _wallOpening;
     [SerializeField] private int _wallCount;
@@ -57,29 +66,62 @@ public class MageBossScript : MonoBehaviour
             return;
         }
 
+        if(UnityEngine.Random.Range(0f, 100f) <= 20 * Time.deltaTime)
+        {
+            _projectileContainerSpeed *= -1;
+        }
+
+        _projectileContainer.transform.Rotate(0, 0, _projectileContainerSpeed * Time.deltaTime);
+
         if (_canAttack)
         {
             _canAttack = false;
-            int attack = UnityEngine.Random.Range(0, 2);
-            switch (attack)
+
+            StartCoroutine(ProjectileAttack());
+            int attack = UnityEngine.Random.Range(0, 3);
+            /*switch (attack)
             {
                 case 0: Debug.Log("Dodge waves");
-                    //StartCoroutine(WaveAttack());
-                    StartCoroutine(WallAttack());
+                    StartCoroutine(WaveAttack());
                     break;
                 case 1:
                     Debug.Log("Projectiles");
-                    StartCoroutine(WallAttack());
+                    StartCoroutine(ProjectileAttack());
                     break;
                 case 2:
                     Debug.Log("Wall openenings");
+                    StartCoroutine(WallAttack());
                     break;
                 default:
                     break;
-            }
+            }*/
         }
 
         Movement();
+    }
+
+    public IEnumerator ProjectileAttack()
+    {
+        _projectileContainer.SetActive(true);
+
+        GameObject reference;
+
+        for (int i = 0; i < _projectileWaveCount; i++)
+        {
+            foreach(GameObject x in _projectileSpawnLocations)
+            {
+                reference = Instantiate(_projectile, x.transform.position, Quaternion.identity);
+                reference.transform.up = x.transform.up;
+                reference.GetComponent<ProjectileScript>().SetFixedSpeed((int)_projectileSpeed);
+            }
+            yield return new WaitForSeconds(_projectileInterval);
+        }
+
+        _projectileContainer.SetActive(false);
+
+        yield return new WaitForSeconds(_attackCooldown);
+
+        _canAttack = true;
     }
 
     public IEnumerator WaveAttack()

@@ -76,6 +76,12 @@ public class ProjectileScript : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        if(collision.tag == "Destroy Projectile")
+        {
+            Destroy(gameObject);
+        }
+
         if((collision.tag == "Enemy") && _isHoming)
         {
             _gameManager.AddScore(2);
