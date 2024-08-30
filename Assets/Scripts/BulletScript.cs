@@ -34,4 +34,6 @@ public class BulletScript : MonoBehaviour
     {
         _damage = damage;
     }
+
+    public float GetDamage() { return _damage; }
 }

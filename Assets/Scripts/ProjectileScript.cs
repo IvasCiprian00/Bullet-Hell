@@ -89,6 +89,7 @@ public class ProjectileScript : MonoBehaviour
             Destroy(gameObject);
             Destroy(collision.gameObject);
         }
+
         if(collision.tag == "Player")
         {
             _player.GetComponent<PlayerScript>().TakeDamage();

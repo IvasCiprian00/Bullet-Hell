@@ -44,8 +44,8 @@ public class MageBossScript : MonoBehaviour
 
     [Header("Misc")]
     [SerializeField] private GameObject _player;
-    [SerializeField] private int _hp;
-    [SerializeField] private int _initialHp;
+    [SerializeField] private float _hp;
+    [SerializeField] private float _initialHp;
 
     public void Awake()
     {
@@ -56,6 +56,16 @@ public class MageBossScript : MonoBehaviour
     public void Start()
     {
         _wallReference = Instantiate(_wall, _player.transform.position, Quaternion.identity);
+        _projectileContainer = Instantiate(_projectileContainer, _player.transform.position, Quaternion.identity);
+
+        int i = 0;
+        foreach(Transform child in _projectileContainer.transform)
+        {
+            _projectileSpawnLocations[i] = child.gameObject;
+            i++;
+        }
+
+        _projectileContainer.SetActive(false);
     }
 
     public void Update()
@@ -77,9 +87,8 @@ public class MageBossScript : MonoBehaviour
         {
             _canAttack = false;
 
-            StartCoroutine(ProjectileAttack());
             int attack = UnityEngine.Random.Range(0, 3);
-            /*switch (attack)
+            switch (attack)
             {
                 case 0: Debug.Log("Dodge waves");
                     StartCoroutine(WaveAttack());
@@ -94,7 +103,7 @@ public class MageBossScript : MonoBehaviour
                     break;
                 default:
                     break;
-            }*/
+            }
         }
 
         Movement();
@@ -188,5 +197,26 @@ public class MageBossScript : MonoBehaviour
         transform.position = Vector2.MoveTowards(transform.position, _player.transform.position, step);
 
         //transform.up = _player.transform.position - transform.position;
+    }
+
+    public void TakeDamage(float damage)
+    {
+        _hp -= damage;
+
+        if(_hp <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        
+        if ((collision.tag == "Bullet"))
+        {
+            float damage = collision.GetComponent<BulletScript>().GetDamage();
+            TakeDamage(damage);
+            Destroy(collision.gameObject);
+        }
     }
 }
