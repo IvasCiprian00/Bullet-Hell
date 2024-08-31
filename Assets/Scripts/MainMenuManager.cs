@@ -45,4 +45,14 @@ public class MainMenuManager : MonoBehaviour
     {
         _soundManager.SFXSource.enabled = !_soundManager.SFXSource.isActiveAndEnabled;
     }
+
+    public void ToggleFlipControls()
+    {
+        _gameManager.FlipControls();
+    }
+
+    public void ToggleFixedJoystick()
+    {
+        _gameManager.FlipFixedJoystick();
+    }
 }

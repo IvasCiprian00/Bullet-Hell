@@ -17,6 +17,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool _gameIsPaused;
     [SerializeField] private bool _gameIsStarted;
 
+    [SerializeField] private bool _controlsFlipped;
+    [SerializeField] private bool _fixedJoystick;
+
     private static GameManager managerInstance;
 
     private void Awake()
@@ -33,10 +36,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void Start()
-    {
-        Time.timeScale = 1;
-    }
 
     private void Update()
     {
@@ -92,4 +91,8 @@ public class GameManager : MonoBehaviour
     public void SetUIManager(UIManager uiManager) { _uiManager = uiManager;  }
     public void SetGameIsStarted(bool cond) {  _gameIsStarted = cond; _gameIsPaused = false; }
     public int GetFirstWaveIndex() { return _firstWaveIndex; }
+    public bool GetControlsFlipped() { return _controlsFlipped; }
+    public bool GetFixedJoystick() {  return _fixedJoystick; }
+    public void FlipControls() {  _controlsFlipped = !_controlsFlipped; }
+    public void FlipFixedJoystick() { _fixedJoystick = !_fixedJoystick; }
 }

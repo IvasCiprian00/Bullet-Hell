@@ -76,7 +76,7 @@ public class MageBossScript : MonoBehaviour
             return;
         }
 
-        if(UnityEngine.Random.Range(0f, 100f) <= 20 * Time.deltaTime)
+        if(UnityEngine.Random.Range(0f, 100f) <= 30 * Time.deltaTime)
         {
             _projectileContainerSpeed *= -1;
         }
@@ -90,15 +90,13 @@ public class MageBossScript : MonoBehaviour
             int attack = UnityEngine.Random.Range(0, 3);
             switch (attack)
             {
-                case 0: Debug.Log("Dodge waves");
+                case 0:
                     StartCoroutine(WaveAttack());
                     break;
                 case 1:
-                    Debug.Log("Projectiles");
                     StartCoroutine(ProjectileAttack());
                     break;
                 case 2:
-                    Debug.Log("Wall openenings");
                     StartCoroutine(WallAttack());
                     break;
                 default:
@@ -174,7 +172,6 @@ public class MageBossScript : MonoBehaviour
 
             if (_attackDirection % 2 == 0)
             {
-                Debug.Log("YEY");
                 reference.transform.position += new Vector3(0, variance, 0);
             }
             else

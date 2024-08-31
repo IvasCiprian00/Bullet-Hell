@@ -149,9 +149,9 @@ MonoBehaviour:
   _wallSpeed: 7
   _wallInterval: 0.75
   _wave: {fileID: 612069165509780427, guid: e8643c15623a2004a9f6d1fd809892d6, type: 3}
-  _waveCount: 5
+  _waveCount: 10
   _waveInterval: 1
-  _waveSpeed: 7
+  _waveSpeed: 6
   _transformSetting:
   - positionChange: {x: 10, y: 0, z: 0}
     rotationChange: {x: 0, y: 0, z: 180}

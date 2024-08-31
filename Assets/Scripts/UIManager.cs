@@ -25,10 +25,25 @@ public class UIManager : MonoBehaviour
     {
         _gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         _gameManager.SetUIManager(this);
+
+        CheckSettings();
     }
+
     private void Update()
     {
         _score.text = "Score: " + _gameManager.GetScore();
+    }
+
+    public void CheckSettings()
+    {
+        if (_gameManager.GetControlsFlipped())
+        {
+            Debug.Log("Flip Controls");
+        }
+        if (_gameManager.GetFixedJoystick())
+        {
+            Debug.Log("Fixed Joystick");
+        }
     }
 
     public void DisplayDodgeRefreshed()
