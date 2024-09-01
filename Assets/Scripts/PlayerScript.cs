@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
-    [SerializeField] private FixedJoystick _moveJoystick;
+    [SerializeField] private Joystick _moveJoystick;
     [SerializeField] private float _speed;
     [SerializeField] private float _maxSpeed;
     [SerializeField] private Rigidbody2D _rigidbody;
@@ -78,8 +78,10 @@ public class PlayerScript : MonoBehaviour
         _isDodging = true;
         _canDodge = false;
 
-        float x = Input.GetAxisRaw("Horizontal");
-        float y = Input.GetAxisRaw("Vertical");
+        float x = _rigidbody.velocity.x;
+        float y = _rigidbody.velocity.y;
+        //float x = Input.GetAxisRaw("Horizontal");
+        //float y = Input.GetAxisRaw("Vertical");
 
         _rigidbody.velocity = Vector2.zero;
         float dodgeForce = _dodgeForce / Mathf.Sqrt(x * x + y * y);
@@ -135,4 +137,5 @@ public class PlayerScript : MonoBehaviour
     }
 
     public bool IsDodging() { return _isDodging; }
+    public void SetJoystick(Joystick joystick) { _moveJoystick = joystick; }
 }

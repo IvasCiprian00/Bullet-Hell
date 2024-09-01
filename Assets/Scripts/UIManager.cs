@@ -8,6 +8,9 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    [SerializeField] private Joystick _fixedJoystick;
+    [SerializeField] private Joystick _floatingJoystick;
+
     [SerializeField] private GameManager _gameManager;
     [SerializeField] private TextMeshProUGUI _score;
     [SerializeField] private GameObject _dodgeRefreshed;
@@ -42,7 +45,15 @@ public class UIManager : MonoBehaviour
         }
         if (_gameManager.GetFixedJoystick())
         {
-            Debug.Log("Fixed Joystick");
+            _player.GetComponent<PlayerScript>().SetJoystick(_fixedJoystick);
+            _fixedJoystick.gameObject.SetActive(true);
+            _floatingJoystick.gameObject.SetActive(false);
+        }
+        else
+        {
+            _player.GetComponent<PlayerScript>().SetJoystick(_floatingJoystick);
+            _fixedJoystick.gameObject.SetActive(false);
+            _floatingJoystick.gameObject.SetActive(true);
         }
     }
 
