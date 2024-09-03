@@ -2,6 +2,8 @@ using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor;
+using UnityEditor.U2D.Aseprite;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -41,7 +43,7 @@ public class UIManager : MonoBehaviour
     {
         if (_gameManager.GetControlsFlipped())
         {
-            Debug.Log("Flip Controls");
+            _fixedJoystick.gameObject.transform.position = new Vector3(-_fixedJoystick.gameObject.transform.position.x, _fixedJoystick.gameObject.transform.position.y, 0);
         }
         if (_gameManager.GetFixedJoystick())
         {
