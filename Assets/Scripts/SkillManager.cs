@@ -63,6 +63,10 @@ public class SkillManager : MonoBehaviour
         ShootController();
     }
 
+    public void FireProjectileButton()
+    {
+        Debug.Log("Shoot");
+    }
 
     public void ShootController()
     {

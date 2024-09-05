@@ -10,8 +10,11 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    [Header("Controls")]
+    [SerializeField] private GameObject[] _controls;
     [SerializeField] private Joystick _fixedJoystick;
     [SerializeField] private Joystick _floatingJoystick;
+    [SerializeField] private GameObject _shootZone;
 
     [SerializeField] private GameManager _gameManager;
     [SerializeField] private TextMeshProUGUI _score;
@@ -43,8 +46,14 @@ public class UIManager : MonoBehaviour
     {
         if (_gameManager.GetControlsFlipped())
         {
-            _fixedJoystick.gameObject.transform.position = new Vector3(-_fixedJoystick.gameObject.transform.position.x, _fixedJoystick.gameObject.transform.position.y, 0);
+            for(int i = 0; i < _controls.Length; i++)
+            {
+                _controls[i].transform.position = new Vector3(-_controls[i].transform.position.x, _controls[i].transform.position.y, _controls[i].transform.position.z);
+            }
+            //_fixedJoystick.gameObject.transform.position = new Vector3(-Mathf.Abs(_fixedJoystick.gameObject.transform.position.x), _fixedJoystick.gameObject.transform.position.y, 0);
+            //_floatingJoystick.gameObject.transform.position = new Vector3(-Mathf.Abs(_floatingJoystick.gameObject.transform.position.x), _floatingJoystick.gameObject.transform.position.y, 0);
         }
+
         if (_gameManager.GetFixedJoystick())
         {
             _player.GetComponent<PlayerScript>().SetJoystick(_fixedJoystick);
