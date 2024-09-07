@@ -92,6 +92,11 @@ public class PlayerScript : MonoBehaviour
     
     public void JoystickDodge()
     {
+        if (!_canDodge)
+        {
+            return;
+        }
+
         _isDodging = true;
         _canDodge = false;
 
