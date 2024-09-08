@@ -60,29 +60,37 @@ public class SkillManager : MonoBehaviour
             return;
         }
 
+        _shootCooldownSlider.value += Time.deltaTime;
+
+        if (_shootCooldownSlider.value >= _shootCooldownSlider.maxValue)
+        {
+            _shootCooldownSlider.gameObject.SetActive(false);
+        }
+
         ShootController();
     }
 
     public void FireProjectileButton()
     {
+        if (!_canShoot)
+        {
+            return;
+        }
+
+        _canShoot = false;
+
+        _initialPosition = Input.mousePosition;
+        _aimsight.SetActive(true);
+        _isAiming = true;
+        _aimTimer = 0f;
+        Time.timeScale = 0.5f;
+
         Debug.Log("Shoot");
     }
 
     public void ShootController()
     {
-        if (!_canShoot)
-        {
-            _shootCooldownSlider.value += Time.deltaTime;
-
-            if(_shootCooldownSlider.value >= _shootCooldownSlider.maxValue)
-            {
-                _shootCooldownSlider.gameObject.SetActive(false);
-            }
-
-            return;
-        }
-
-        if (Input.GetButtonDown("Fire1") && !_isAiming)
+        /*if (Input.GetButtonDown("Fire1") && !_isAiming)
         {
             _shootCooldownSlider.gameObject.SetActive(false);
             if (CheckMousePosition())
@@ -93,7 +101,7 @@ public class SkillManager : MonoBehaviour
                 _aimTimer = 0f;
                 Time.timeScale = 0.5f;
             }
-        }
+        }*/
 
         if (_isAiming)
         {

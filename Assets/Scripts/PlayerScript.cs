@@ -75,6 +75,11 @@ public class PlayerScript : MonoBehaviour
 
     public void Dodge()
     {
+        if (!_canDodge)
+        {
+            return;
+        }
+
         _isDodging = true;
         _canDodge = false;
 
