@@ -84,29 +84,14 @@ public class SkillManager : MonoBehaviour
         _isAiming = true;
         _aimTimer = 0f;
         Time.timeScale = 0.5f;
-
-        Debug.Log("Shoot");
     }
 
     public void ShootController()
     {
-        /*if (Input.GetButtonDown("Fire1") && !_isAiming)
-        {
-            _shootCooldownSlider.gameObject.SetActive(false);
-            if (CheckMousePosition())
-            {
-                _initialPosition = Input.mousePosition;
-                _aimsight.SetActive(true);
-                _isAiming = true;
-                _aimTimer = 0f;
-                Time.timeScale = 0.5f;
-            }
-        }*/
 
         if (_isAiming)
         {
-            //TouchInput();
-            MouseInput();
+            TouchInput();
 
             _aimTimer += Time.deltaTime;
             Time.fixedDeltaTime = this.fixedDeltaTime * Time.timeScale;
