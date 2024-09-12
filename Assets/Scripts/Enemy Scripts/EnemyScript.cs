@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class EnemyScript : MonoBehaviour
 {
+    private SoundManager _soundManager;
+
     [SerializeField] private GameObject _sprite;
     [SerializeField] private GameObject _player;
     [SerializeField] private float _moveSpeed;
@@ -18,6 +20,10 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] private Slider _fireWarning;
     private float _timer;
 
+    [Header("Sound")]
+    [SerializeField] private AudioClip _shootSound;
+    [SerializeField] private AudioClip _deathSound;
+
     private void Start()
     {
         _player = GameObject.Find("Player");
@@ -26,6 +32,8 @@ public class EnemyScript : MonoBehaviour
 
         _projectile.GetComponent<ProjectileScript>().SetSpeed(_projectileSpeed);
         _projectile.GetComponent<ProjectileScript>().SetRotationSpeed(_projectileRotationSpeed);
+
+        _soundManager = GameObject.Find("Sound Manager").GetComponent<SoundManager>();
     }
 
     private void Update()
@@ -48,6 +56,7 @@ public class EnemyScript : MonoBehaviour
 
         if (_timer >= _fireRate)
         {
+            _soundManager.Play3DSound(_shootSound, transform.position);
             if (_isPredicting)
             {
                 FirePredicting();
@@ -95,5 +104,10 @@ public class EnemyScript : MonoBehaviour
             return;
         }
         transform.Translate(Vector2.right * (distance - 3f) * Time.deltaTime);*/
+    }
+
+    public void OnDestroy()
+    {
+        _soundManager.PlaySound(_deathSound);
     }
 }

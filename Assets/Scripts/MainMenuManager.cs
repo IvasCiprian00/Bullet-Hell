@@ -38,12 +38,12 @@ public class MainMenuManager : MonoBehaviour
 
     public void ToggleMusic()
     {
-        _soundManager.musicSource.enabled = !_soundManager.musicSource.isActiveAndEnabled;
+        _soundManager.ToggleMusic();
     }
 
     public void ToggleSFX()
     {
-        _soundManager.SFXSource.enabled = !_soundManager.SFXSource.isActiveAndEnabled;
+        _soundManager.ToggleSFX();
     }
 
     public void ToggleFlipControls()

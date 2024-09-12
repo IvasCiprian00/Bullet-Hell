@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
+    private SoundManager _soundManager;
+
     [SerializeField] private Joystick _moveJoystick;
     [SerializeField] private float _speed;
     [SerializeField] private float _maxSpeed;
@@ -16,11 +18,15 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private bool _canDodge;
     private bool _isDodging;
 
+    [Header("Sound")]
+    [SerializeField] private AudioClip _dodgeSound;
+
     private void Awake()
     {
         _canDodge = true;
         _rigidbody = GetComponent<Rigidbody2D>();
         GameObject.Find("Game Manager").GetComponent<GameManager>().SetPlayer();
+        _soundManager = GameObject.Find("Sound Manager").GetComponent<SoundManager>();
     }
 
     private void Update()
@@ -91,6 +97,8 @@ public class PlayerScript : MonoBehaviour
         _rigidbody.velocity = Vector2.zero;
         float dodgeForce = _dodgeForce / Mathf.Sqrt(x * x + y * y);
         _rigidbody.AddForce (new Vector2(x, y) * dodgeForce, ForceMode2D.Impulse);
+
+        _soundManager.PlaySound(_dodgeSound);
 
         StartCoroutine(RefreshDodge());
     }

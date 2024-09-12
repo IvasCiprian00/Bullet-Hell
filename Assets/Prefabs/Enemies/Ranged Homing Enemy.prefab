@@ -407,6 +407,8 @@ MonoBehaviour:
   _accuracy: 0
   _isPredicting: 0
   _fireWarning: {fileID: 0}
+  _shootSound: {fileID: 8300000, guid: 4b133cb5b228441c6b5661e5f8c9bf91, type: 3}
+  _deathSound: {fileID: 8300000, guid: e34e5de4fb6f0405987dc922e27778b9, type: 3}
 --- !u!1001 &194027907399314551
 PrefabInstance:
   m_ObjectHideFlags: 0

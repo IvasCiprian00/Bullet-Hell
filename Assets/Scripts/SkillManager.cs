@@ -16,6 +16,8 @@ public class SkillManager : MonoBehaviour
         public int projCount;
     };
 
+    private SoundManager _soundManager;
+
     [SerializeField] private GameObject _player;
     [SerializeField] private Slider _shootCooldownSlider;
     [SerializeField] private GameManager _gameManager;
@@ -31,6 +33,9 @@ public class SkillManager : MonoBehaviour
     [SerializeField] private bool _canShoot;
     private float fixedDeltaTime;
 
+    [Header("Sound")]
+    [SerializeField] private AudioClip _shootSound;
+
 
     private Vector3 _initialPosition;
     private void Awake()
@@ -38,6 +43,7 @@ public class SkillManager : MonoBehaviour
         _canShoot = true;
         _player = GameObject.Find("Player");
         _gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        _soundManager = GameObject.Find("Sound Manager").GetComponent<SoundManager>();
         this.fixedDeltaTime = Time.fixedDeltaTime;
     }
 
@@ -67,6 +73,10 @@ public class SkillManager : MonoBehaviour
             _shootCooldownSlider.gameObject.SetActive(false);
         }
 
+        if (Input.GetButtonDown("Fire1"))
+        {
+            FireProjectileButton();
+        }
         ShootController();
     }
 
@@ -91,7 +101,8 @@ public class SkillManager : MonoBehaviour
 
         if (_isAiming)
         {
-            TouchInput();
+            MouseInput();
+            //TouchInput();
 
             _aimTimer += Time.deltaTime;
             Time.fixedDeltaTime = this.fixedDeltaTime * Time.timeScale;
@@ -121,6 +132,7 @@ public class SkillManager : MonoBehaviour
     {
         GameObject reference;
         reference = InstantiateSingleProjectile(0);
+        _soundManager.PlaySound(_shootSound);
         reference.GetComponent<BulletScript>().SetDamage(_upgradeInfo[_upgradeLevel].damage);
 
         for (int i = 1; i < _upgradeInfo[_upgradeLevel].projCount; i++) 
@@ -129,6 +141,8 @@ public class SkillManager : MonoBehaviour
 
             reference = InstantiateSingleProjectile(deviation);
             reference.GetComponent<BulletScript>().SetDamage(_upgradeInfo[_upgradeLevel].damage / 2);
+
+            _soundManager.PlaySound(_shootSound);
         }
     }
 
@@ -150,25 +164,6 @@ public class SkillManager : MonoBehaviour
         _canShoot = true;
     }
 
-    public bool CheckMousePosition()
-    {
-        return true;
-        /*float x = Input.mousePosition.x;
-        float y = Input.mousePosition.y;
-
-        if(x <= 200 && y <= 200)
-        {
-            return false;
-        }
-
-        if(x <= 960)
-        {
-            return false;
-        }
-
-        return true;*/
-    }
-
     public void MouseInput()
     {
         Vector3 mousePos = Input.mousePosition;
@@ -183,6 +178,12 @@ public class SkillManager : MonoBehaviour
     public void TouchInput()
     {
         Vector3 mousePos = Input.mousePosition;
+
+        /*if(mousePos.x <= Screen.width / 2)
+        {
+            return;
+        }*/
+
         mousePos.z = 0;
         Vector3 direction = (mousePos - _initialPosition).normalized;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
