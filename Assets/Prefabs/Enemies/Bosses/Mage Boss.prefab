@@ -134,7 +134,7 @@ MonoBehaviour:
   _attackCooldown: 5
   _wall: {fileID: 5780160194038940041, guid: 40ea2bbe54d9c5644a5e046a718c2078, type: 3}
   _projectile: {fileID: 8399809645883171476, guid: 964d6568b604cea4ba9524b4f63bcefe, type: 3}
-  _projectileContainer: {fileID: 0}
+  _projectileContainer: {fileID: 6425452000269572870, guid: 8e13568c127f03646a35ac87987e6915, type: 3}
   _projectileContainerSpeed: 50
   _projectileSpeed: 4
   _projectileWaveCount: 100

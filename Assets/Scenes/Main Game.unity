@@ -545,7 +545,7 @@ GameObject:
   - component: {fileID: 401573186}
   - component: {fileID: 401573185}
   m_Layer: 0
-  m_Name: SFX Manager
+  m_Name: SFX Source
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -836,7 +836,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &468106381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -930,10 +930,54 @@ MonoBehaviour:
     enemies:
     - {fileID: 8399809645883171476, guid: 87ef2750817d8714781a3cfee1cb87ef, type: 3}
     - {fileID: 8399809645883171476, guid: 87ef2750817d8714781a3cfee1cb87ef, type: 3}
-    enemyCount: 0200000002000000
+    - {fileID: 8399809645883171476, guid: 87ef2750817d8714781a3cfee1cb87ef, type: 3}
+    - {fileID: 8399809645883171476, guid: 87ef2750817d8714781a3cfee1cb87ef, type: 3}
+    - {fileID: 8399809645883171476, guid: 87ef2750817d8714781a3cfee1cb87ef, type: 3}
+    - {fileID: 8399809645883171476, guid: 87ef2750817d8714781a3cfee1cb87ef, type: 3}
+    enemyCount: 010000000100000002000000020000000300000004000000
     timeGiven:
+    - 5
+    - 5
     - 15
     - 15
+    - 20
+    - 30
+  - name: Mage Boss
+    enemies:
+    - {fileID: 4267058289680586962, guid: 9a85620062c480b498cd477428b37d3b, type: 3}
+    enemyCount: 01000000
+    timeGiven:
+    - 40
+  - name: All types 1
+    enemies:
+    - {fileID: 8399809645883171476, guid: f57a1c538ebb38941a975067a9726b27, type: 3}
+    - {fileID: 8399809645883171476, guid: 88c1c1b49696a174291f51318977f02b, type: 3}
+    - {fileID: 8399809645883171476, guid: 87ef2750817d8714781a3cfee1cb87ef, type: 3}
+    enemyCount: 020000000100000001000000
+    timeGiven:
+    - 0
+    - 0
+    - 30
+  - name: All types 2
+    enemies:
+    - {fileID: 8399809645883171476, guid: f57a1c538ebb38941a975067a9726b27, type: 3}
+    - {fileID: 8399809645883171476, guid: 88c1c1b49696a174291f51318977f02b, type: 3}
+    - {fileID: 8399809645883171476, guid: 87ef2750817d8714781a3cfee1cb87ef, type: 3}
+    enemyCount: 030000000100000001000000
+    timeGiven:
+    - 0
+    - 0
+    - 40
+  - name: All types 3
+    enemies:
+    - {fileID: 8399809645883171476, guid: f57a1c538ebb38941a975067a9726b27, type: 3}
+    - {fileID: 8399809645883171476, guid: 88c1c1b49696a174291f51318977f02b, type: 3}
+    - {fileID: 8399809645883171476, guid: 87ef2750817d8714781a3cfee1cb87ef, type: 3}
+    enemyCount: 010000000200000002000000
+    timeGiven:
+    - 0
+    - 0
+    - 40
   - name: Diamong Boss
     enemies:
     - {fileID: 5930827106666731999, guid: 0bef014419201a548895a6ae07f7b8a5, type: 3}
@@ -3230,7 +3274,7 @@ GameObject:
   - component: {fileID: 1352345741}
   - component: {fileID: 1352345740}
   m_Layer: 0
-  m_Name: Music Manager
+  m_Name: Music Source
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3653,7 +3697,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1431506373}
-  - component: {fileID: 1431506372}
+  - component: {fileID: 1431506374}
   m_Layer: 0
   m_Name: Sound Manager
   m_TagString: Untagged
@@ -3661,20 +3705,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1431506372
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1431506371}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15ea71cc6bc3cc14996988f61a08a083, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _musicSource: {fileID: 1352345740}
-  _sfxSource: {fileID: 401573185}
 --- !u!4 &1431506373
 Transform:
   m_ObjectHideFlags: 0
@@ -3692,6 +3722,36 @@ Transform:
   - {fileID: 401573186}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1431506374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1431506371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15ea71cc6bc3cc14996988f61a08a083, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundList:
+  - name: ENEMY_SHOOT
+    sounds:
+    - {fileID: 8300000, guid: 4b133cb5b228441c6b5661e5f8c9bf91, type: 3}
+  - name: PLAYER_SHOOT
+    sounds:
+    - {fileID: 8300000, guid: af66162561d2eed40ad49268cab318bb, type: 3}
+  - name: DEATH
+    sounds:
+    - {fileID: 8300000, guid: e34e5de4fb6f0405987dc922e27778b9, type: 3}
+  - name: PLAYER_DEATH
+    sounds:
+    - {fileID: 8300000, guid: 566d2ea6240b489479a6e9fd608c2621, type: 3}
+  - name: DODGE
+    sounds:
+    - {fileID: 8300000, guid: 4e349dc959014a845b9aa317d1c2b7f0, type: 3}
+  _musicSource: {fileID: 1352345740}
+  _sfxSource: {fileID: 401573185}
 --- !u!1 &1521926816
 GameObject:
   m_ObjectHideFlags: 0
@@ -25062,87 +25122,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad6049f0877fd344dadfe582b5def269, type: 3}
---- !u!1001 &3306666130530296584
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2919979297225405704, guid: 9a85620062c480b498cd477428b37d3b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -3.86
-      objectReference: {fileID: 0}
-    - target: {fileID: 2919979297225405704, guid: 9a85620062c480b498cd477428b37d3b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.69119334
-      objectReference: {fileID: 0}
-    - target: {fileID: 2919979297225405704, guid: 9a85620062c480b498cd477428b37d3b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.3957223
-      objectReference: {fileID: 0}
-    - target: {fileID: 2919979297225405704, guid: 9a85620062c480b498cd477428b37d3b, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2919979297225405704, guid: 9a85620062c480b498cd477428b37d3b, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2919979297225405704, guid: 9a85620062c480b498cd477428b37d3b, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2919979297225405704, guid: 9a85620062c480b498cd477428b37d3b, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2919979297225405704, guid: 9a85620062c480b498cd477428b37d3b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2919979297225405704, guid: 9a85620062c480b498cd477428b37d3b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2919979297225405704, guid: 9a85620062c480b498cd477428b37d3b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4267058289680586962, guid: 9a85620062c480b498cd477428b37d3b, type: 3}
-      propertyPath: m_Name
-      value: Mage Boss
-      objectReference: {fileID: 0}
-    - target: {fileID: 4267058289680586962, guid: 9a85620062c480b498cd477428b37d3b, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4376285326005089692, guid: 9a85620062c480b498cd477428b37d3b, type: 3}
-      propertyPath: _projectileContainer
-      value: 
-      objectReference: {fileID: 6425452000269572870, guid: 8e13568c127f03646a35ac87987e6915, type: 3}
-    - target: {fileID: 4376285326005089692, guid: 9a85620062c480b498cd477428b37d3b, type: 3}
-      propertyPath: _projectileSpawnLocations.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4376285326005089692, guid: 9a85620062c480b498cd477428b37d3b, type: 3}
-      propertyPath: _projectileSpawnLocations.Array.data[1]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4376285326005089692, guid: 9a85620062c480b498cd477428b37d3b, type: 3}
-      propertyPath: _projectileSpawnLocations.Array.data[2]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4376285326005089692, guid: 9a85620062c480b498cd477428b37d3b, type: 3}
-      propertyPath: _projectileSpawnLocations.Array.data[3]
-      value: 
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 9a85620062c480b498cd477428b37d3b, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -25154,6 +25133,5 @@ SceneRoots:
   - {fileID: 301576554}
   - {fileID: 1609556826}
   - {fileID: 1414631575}
-  - {fileID: 3306666130530296584}
   - {fileID: 1299451808}
   - {fileID: 1431506373}

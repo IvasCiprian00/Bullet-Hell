@@ -46,20 +46,23 @@ public class EyeBossScript : MonoBehaviour
     {
         _timer += Time.deltaTime;
 
-        if(_timer >= _fireRate)
+        if(_timer < _fireRate)
         {
-            _timer = 0;
+            return;
+        }
 
-            GameObject[] orbs = GameObject.FindGameObjectsWithTag("Orb");
+        _timer = 0;
 
-            //_audioSource.Play();
+        GameObject[] orbs = GameObject.FindGameObjectsWithTag("Orb");
 
-            for(int i = 0; i < orbs.Length; i++)
+        SoundManager.PlaySound(SoundType.ENEMY_SHOOT);
+        //_audioSource.Play();
+
+        for (int i = 0; i < orbs.Length; i++)
+        {
+            if (orbs[i] != null)
             {
-                if (orbs[i] != null)
-                {
-                    orbs[i].GetComponent<OrbScript>().Shoot();
-                }
+                orbs[i].GetComponent<OrbScript>().Shoot();
             }
         }
     }

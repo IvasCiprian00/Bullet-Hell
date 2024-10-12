@@ -132,7 +132,7 @@ public class SkillManager : MonoBehaviour
     {
         GameObject reference;
         reference = InstantiateSingleProjectile(0);
-        _soundManager.PlaySound(_shootSound);
+        SoundManager.PlaySound(SoundType.PLAYER_SHOOT);
         reference.GetComponent<BulletScript>().SetDamage(_upgradeInfo[_upgradeLevel].damage);
 
         for (int i = 1; i < _upgradeInfo[_upgradeLevel].projCount; i++) 
@@ -142,7 +142,7 @@ public class SkillManager : MonoBehaviour
             reference = InstantiateSingleProjectile(deviation);
             reference.GetComponent<BulletScript>().SetDamage(_upgradeInfo[_upgradeLevel].damage / 2);
 
-            _soundManager.PlaySound(_shootSound);
+            SoundManager.PlaySound(SoundType.PLAYER_SHOOT);
         }
     }
 

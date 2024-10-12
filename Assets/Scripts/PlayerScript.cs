@@ -98,7 +98,7 @@ public class PlayerScript : MonoBehaviour
         float dodgeForce = _dodgeForce / Mathf.Sqrt(x * x + y * y);
         _rigidbody.AddForce (new Vector2(x, y) * dodgeForce, ForceMode2D.Impulse);
 
-        _soundManager.PlaySound(_dodgeSound);
+        SoundManager.PlaySound(SoundType.DODGE);
 
         StartCoroutine(RefreshDodge());
     }
@@ -143,6 +143,7 @@ public class PlayerScript : MonoBehaviour
         }
 
         Camera.main.transform.parent = null;
+        SoundManager.PlaySound(SoundType.PLAYER_DEATH);
         Destroy(gameObject);
     }
 
